@@ -1,16 +1,17 @@
 import { ReactElement } from "react";
 import { QuickLinks } from "~components/quick-links";
 import { GlobalStyles } from "~global-styles";
-import { Container, TimeLabel } from "~newtab.styles"
+import { Container } from "~newtab.styles";
+import { Clock } from "~components/clock";
 
 const NewTab = (): ReactElement => {
   return (
     <Container>
       <GlobalStyles />
-      <TimeLabel>15:20</TimeLabel>
+      <Clock />
       <QuickLinks />
     </Container>
-  )
-}
+  );
+};
 
-export default NewTab
+export default NewTab;

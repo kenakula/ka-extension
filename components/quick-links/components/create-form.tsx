@@ -1,33 +1,37 @@
-import { ReactElement } from "react"
+import { ReactElement } from "react";
 
-import { Button } from "~components/button/button"
-import { FieldContainer } from "~components/quick-links/styles"
-import { Field, Form, Formik } from "~node_modules/formik"
-import { IQuickLink } from "~shared/interfaces"
-
-interface IProps {
-  handleSubmit: (values: IQuickLink) => void;
-  defaultValues?: IQuickLink;
-}
+import { Button } from "~components/button/button";
+import { FieldContainer, FormStyled } from "~components/quick-links/styles";
+import { Field, Form, Formik } from "~node_modules/formik";
+import { IQuickLink } from "~shared/interfaces";
 
 const DEFAULT_VALUES: IQuickLink = {
   url: "https://",
   label: "",
   iconLink: "",
   iconName: "",
-  useCustomIcon: false
+  useCustomIcon: false,
+};
+
+interface IProps {
+  handleSubmit: (values: IQuickLink, rowName?: string) => void;
+  rowName?: string;
+  defaultValues?: IQuickLink;
 }
 
-export const CreateForm = ({handleSubmit, defaultValues = DEFAULT_VALUES}: IProps): ReactElement => {
-
-
+export const CreateForm = ({
+  handleSubmit,
+  rowName,
+  defaultValues = DEFAULT_VALUES,
+}: IProps): ReactElement => {
   return (
     <Formik<IQuickLink>
       initialValues={defaultValues}
       onSubmit={(values) => {
-        handleSubmit(values);
-      }}>
-      <Form>
+        handleSubmit(values, rowName);
+      }}
+    >
+      <FormStyled>
         <FieldContainer>
           <label htmlFor="url">url</label>
           <Field id="url" name="url" />
@@ -53,8 +57,10 @@ export const CreateForm = ({handleSubmit, defaultValues = DEFAULT_VALUES}: IProp
         {/*  <Field name="useCustomIcon" id="useCustomIcon" type="checkbox" />*/}
         {/*</FieldContainer>*/}
 
-        <Button variant="primary" type="submit">Add</Button>
-      </Form>
+        <Button variant="primary" type="submit">
+          Add
+        </Button>
+      </FormStyled>
     </Formik>
-  )
-}
+  );
+};

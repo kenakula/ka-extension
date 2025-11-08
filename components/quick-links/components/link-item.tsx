@@ -1,24 +1,31 @@
-import { ReactElement } from "react"
+import { ReactElement } from "react";
 
-import { getFaviconUrl } from "~components/quick-links/helpers"
+import { getFaviconUrl } from "~components/quick-links/helpers";
 import {
   ContextItem,
   ContextMenuContainer,
   Link,
-  LinkImage, LinkItemStyled
-} from "~components/quick-links/styles"
-import { Avatar, ContextMenu } from "~node_modules/radix-ui"
-import { BsFillPencilFill, BsTrash3 } from "~node_modules/react-icons/bs"
-import { IQuickLink } from "~shared/interfaces"
+  LinkImage,
+  LinkItemStyled,
+} from "~components/quick-links/styles";
+import { Avatar, ContextMenu } from "~node_modules/radix-ui";
+import { BsFillPencilFill, BsTrash3 } from "~node_modules/react-icons/bs";
+import { IQuickLink } from "~shared/interfaces";
 
 interface IProps {
   link: IQuickLink;
-  handleDeleteLink: (url: string) => void;
-  handleEditLink: (link: IQuickLink) => void;
+  handleDeleteLink: (setName: string, linkUrl: string) => void;
+  handleEditLink: (setName: string, link: IQuickLink) => void;
+  setName: string;
 }
 
-export const LinkItem = ({link, handleDeleteLink, handleEditLink}: IProps): ReactElement => {
-  const {url, label} = link;
+export const LinkItem = ({
+  link,
+  handleDeleteLink,
+  handleEditLink,
+  setName,
+}: IProps): ReactElement => {
+  const { url, label } = link;
 
   return (
     <LinkItemStyled>
@@ -37,11 +44,11 @@ export const LinkItem = ({link, handleDeleteLink, handleEditLink}: IProps): Reac
         </ContextMenu.Trigger>
         <ContextMenu.Portal>
           <ContextMenuContainer>
-            <ContextItem onSelect={() => handleDeleteLink(url)}>
+            <ContextItem onSelect={() => handleDeleteLink(setName, url)}>
               <BsTrash3 />
               <span>Delete</span>
             </ContextItem>
-            <ContextItem onSelect={() => handleEditLink(link)}>
+            <ContextItem onSelect={() => handleEditLink(setName, link)}>
               <BsFillPencilFill />
               <span>Edit</span>
             </ContextItem>
@@ -49,5 +56,5 @@ export const LinkItem = ({link, handleDeleteLink, handleEditLink}: IProps): Reac
         </ContextMenu.Portal>
       </ContextMenu.Root>
     </LinkItemStyled>
-  )
-}
+  );
+};

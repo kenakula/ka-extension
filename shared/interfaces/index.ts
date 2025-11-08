@@ -13,3 +13,8 @@ export interface IQuickLink {
   iconName?: string;
   useCustomIcon?: boolean;
 }
+
+export type TQuickLinksPanel = Record<
+  string,
+  { links: IQuickLink[]; isHidden: boolean }
+>;
