@@ -1,14 +1,10 @@
 import { ReactElement } from "react";
-import { Popover, Tooltip } from "~node_modules/radix-ui";
-import {
-  AddPopover,
-  LinkItemStyled,
-  AddLinkButton,
-  TooltipContent,
-} from "~components/quick-links/styles";
-import { SlPlus } from "~node_modules/react-icons/sl";
-import { CreateForm } from "~components/quick-links/components/create-form";
+import { Popover } from "radix-ui";
+import { AddPopover, LinkItemStyled, AddLinkButton } from "../styles";
+import { SlPlus } from "react-icons/sl";
+import { CreateForm } from "./create-form/create-form";
 import { IQuickLink } from "~shared/interfaces";
+import { Tooltip } from "~components/tooltip";
 
 interface IProps {
   rowName: string;
@@ -18,20 +14,13 @@ interface IProps {
 export const AddLink = ({ rowName, addLink }: IProps): ReactElement => {
   return (
     <Popover.Root>
-      <Tooltip.Provider>
-        <Tooltip.Root>
-          <Tooltip.Trigger asChild>
-            <LinkItemStyled>
-              <AddLinkButton>
-                <SlPlus size={18} />
-              </AddLinkButton>
-            </LinkItemStyled>
-          </Tooltip.Trigger>
-          <Tooltip.Portal>
-            <TooltipContent>add link</TooltipContent>
-          </Tooltip.Portal>
-        </Tooltip.Root>
-      </Tooltip.Provider>
+      <Tooltip text="add link">
+        <LinkItemStyled>
+          <AddLinkButton>
+            <SlPlus size={18} />
+          </AddLinkButton>
+        </LinkItemStyled>
+      </Tooltip>
       <Popover.Portal>
         <AddPopover sideOffset={20}>
           <CreateForm rowName={rowName} handleSubmit={addLink} />

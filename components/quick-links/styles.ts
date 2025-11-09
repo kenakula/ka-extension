@@ -1,11 +1,4 @@
-import {
-  Avatar,
-  ContextMenu,
-  Dialog,
-  Popover,
-  RadioGroup,
-  Tooltip,
-} from "radix-ui";
+import { Avatar, ContextMenu, Dialog, Popover, RadioGroup } from "radix-ui";
 import styled from "styled-components";
 import { Form } from "formik";
 
@@ -158,12 +151,6 @@ export const AddPopover = styled(Popover.Content)`
   border-radius: 8px;
 `;
 
-export const TooltipContent = styled(Tooltip.Content)`
-  background-color: rgba(240, 248, 255, 0.1);
-  border-radius: 20px;
-  padding: 5px 10px;
-`;
-
 export const GenericButton = styled.button`
   padding: 0;
   display: flex;
@@ -194,7 +181,7 @@ export const RemoveRowButton = styled(GenericButton)`
 
 export const SettingsButton = styled(Dialog.Trigger)`
   position: absolute;
-  left: 20px;
+  right: 20px;
   top: 20px;
   padding: 0;
   display: flex;
@@ -226,34 +213,16 @@ export const SettingsContent = styled(Dialog.Content)`
   background-color: rgba(240, 248, 255, 0.2);
 `;
 
-export const DialogOverlay = styled(Dialog.Overlay)`
-  background-color: rgba(42, 52, 64, 0.7);
-  backdrop-filter: blur(5px);
-  width: 100%;
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-`;
-
-export const DialogTitle = styled(Dialog.Title)`
-  margin: 0 0 20px;
-  text-align: center;
-`;
-
-export const DialogSection = styled.div``;
-
-export const DialogSectionHeader = styled.div`
+export const SettingsSectionHeader = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-export const DialogSectionTitle = styled.h3`
+export const SettingsSectionTitle = styled.h3`
   margin: 0 0 20px;
 `;
 
-export const DialogSectionList = styled.ul`
+export const SettingsSectionList = styled.ul`
   margin: 0;
   padding: 0;
   display: flex;
@@ -356,5 +325,8 @@ export const RadioIndicator = styled(RadioGroup.Indicator)`
 `;
 
 export const IconWrapper = styled.span`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
 `;

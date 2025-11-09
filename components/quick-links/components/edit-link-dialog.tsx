@@ -1,8 +1,9 @@
 import { ReactElement } from "react";
-import { Dialog, VisuallyHidden } from "radix-ui";
-import { CreateForm } from "./create-form";
-import { DialogOverlay, DialogTitle, EditDialog } from "../styles";
+import { VisuallyHidden } from "radix-ui";
+import { CreateForm } from "./create-form/create-form";
+import { EditDialog } from "../styles";
 import { IQuickLink } from "~shared/interfaces";
+import { Dialog, DialogDescription, DialogTitle } from "~components/dialog";
 
 interface IProps {
   isOpen: boolean;
@@ -18,22 +19,16 @@ export const EditLinkDialog = ({
   defaultValues,
 }: IProps): ReactElement => {
   return (
-    <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
-      <Dialog.Portal>
-        <DialogOverlay />
-        <EditDialog>
-          <DialogTitle>Edit link</DialogTitle>
-          <VisuallyHidden.Root>
-            <Dialog.Description>
-              Edit link by defining url and label
-            </Dialog.Description>
-          </VisuallyHidden.Root>
-          <CreateForm
-            handleSubmit={handleSubmit}
-            defaultValues={defaultValues}
-          />
-        </EditDialog>
-      </Dialog.Portal>
-    </Dialog.Root>
+    <Dialog onOpenChange={onOpenChange} isOpen={isOpen}>
+      <EditDialog>
+        <DialogTitle>Edit link</DialogTitle>
+        <VisuallyHidden.Root>
+          <DialogDescription>
+            Edit link by defining url and label
+          </DialogDescription>
+        </VisuallyHidden.Root>
+        <CreateForm handleSubmit={handleSubmit} defaultValues={defaultValues} />
+      </EditDialog>
+    </Dialog>
   );
 };

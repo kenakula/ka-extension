@@ -1,22 +1,12 @@
 import { ReactElement, useState } from "react";
 
-import { Button } from "~components/button/button";
-import {
-  FieldContainer,
-  FormStyled,
-  GenericButton,
-} from "~components/quick-links/styles";
-import { Field, Formik } from "~node_modules/formik";
+import { Button } from "~components/button";
+import { FieldContainer, FormStyled } from "../../styles";
+import { Field, Formik } from "formik";
 import { IQuickLink } from "~shared/interfaces";
-import { IconSelect } from "~components/quick-links/components/icon-select";
-
-const DEFAULT_VALUES: IQuickLink = {
-  url: "https://",
-  label: "",
-  iconLink: "",
-  iconName: "",
-  useCustomIcon: false,
-};
+import { IconSelect } from "../icon-select";
+import { DEFAULT_VALUES } from "./constants";
+import { FaIcon } from "../fa-icon";
 
 interface IProps {
   handleSubmit: (values: IQuickLink, rowName?: string) => void;
@@ -37,12 +27,25 @@ export const CreateForm = ({
     }
   };
 
+  const handleFormSubmit = (values: IQuickLink): void => {
+    let urlValue = values.url;
+
+    if (!urlValue.startsWith("https://")) {
+      urlValue = `https://${urlValue}`;
+      values.url = urlValue;
+    }
+
+    handleSubmit(values, rowName);
+  };
+
+  const handleOpenIconModal = (): void => {
+    setIsIconModalOpen(true);
+  };
+
   return (
     <Formik<IQuickLink>
       initialValues={defaultValues}
-      onSubmit={(values) => {
-        handleSubmit(values, rowName);
-      }}
+      onSubmit={handleFormSubmit}
     >
       {({ values }) => (
         <FormStyled>
@@ -58,18 +61,17 @@ export const CreateForm = ({
 
           <FieldContainer>
             <label htmlFor="#">select custom icon</label>
-            <GenericButton
+            <Button
               type="button"
-              onClick={() => {
-                setIsIconModalOpen(true);
-              }}
+              variant="secondary"
+              onClick={handleOpenIconModal}
             >
               {values.iconName ? (
-                <span>{values.iconName}</span>
+                <FaIcon iconName={values.iconName} />
               ) : (
                 <span>choose icon</span>
               )}
-            </GenericButton>
+            </Button>
             <IconSelect
               isOpen={isIconModalOpen}
               onOpenChange={handleCloseEditModal}

@@ -1,8 +1,7 @@
 import { ReactElement, useLayoutEffect } from "react";
 import { QuickLinks } from "~components/quick-links";
-import { GlobalStyles } from "~global-styles";
-import { Container } from "~newtab.styles";
 import { Clock } from "~components/clock";
+import { NewTabContainer, GlobalStyles } from "~shared/styles";
 
 const NewTab = (): ReactElement => {
   useLayoutEffect(() => {
@@ -10,11 +9,11 @@ const NewTab = (): ReactElement => {
   }, []);
 
   return (
-    <Container>
+    <NewTabContainer>
       <GlobalStyles />
       <Clock />
       <QuickLinks />
-    </Container>
+    </NewTabContainer>
   );
 };
 

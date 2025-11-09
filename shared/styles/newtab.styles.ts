@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export const Container = styled.div`
+export const NewTabContainer = styled.div`
   padding: 2rem;
   display: flex;
   flex-direction: column;

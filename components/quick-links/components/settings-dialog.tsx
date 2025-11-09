@@ -1,20 +1,23 @@
 import { ReactElement } from "react";
 import {
-  DialogOverlay,
-  DialogSection,
-  DialogSectionHeader,
-  DialogSectionList,
-  DialogSectionTitle,
-  DialogTitle,
+  SettingsSectionHeader,
+  SettingsSectionList,
+  SettingsSectionTitle,
   GenericButton,
   SettingsButton,
   SettingsContent,
 } from "../styles";
-import { FiSettings } from "~node_modules/react-icons/fi";
-import { Dialog, VisuallyHidden } from "~node_modules/radix-ui";
+import { FiSettings } from "react-icons/fi";
+import { VisuallyHidden } from "radix-ui";
 import { TQuickLinksPanel } from "~shared/interfaces";
-import { RowControls } from "~components/quick-links/components/row-controls";
+import { RowControls } from "./row-controls";
 import { SlPlus } from "react-icons/sl";
+import {
+  Dialog,
+  DialogDescription,
+  DialogSection,
+  DialogTitle,
+} from "~components/dialog";
 
 interface IProps {
   addRow: (rowName?: string) => void;
@@ -23,6 +26,12 @@ interface IProps {
   toggleRowVisibility: (rowName: string) => void;
 }
 
+const TriggerButton = (): ReactElement => (
+  <SettingsButton>
+    <FiSettings size={36} />
+  </SettingsButton>
+);
+
 export const SettingsDialog = ({
   addRow,
   removeRow,
@@ -30,41 +39,35 @@ export const SettingsDialog = ({
   toggleRowVisibility,
 }: IProps): ReactElement => {
   return (
-    <Dialog.Root>
-      <SettingsButton>
-        <FiSettings size={36} />
-      </SettingsButton>
-      <Dialog.Portal>
-        <DialogOverlay />
-        <SettingsContent>
-          <DialogTitle>Settings</DialogTitle>
-          <VisuallyHidden.Root>
-            <Dialog.Description>Edit start page settings</Dialog.Description>
-          </VisuallyHidden.Root>
-          <DialogSection>
-            <DialogSectionHeader>
-              <DialogSectionTitle>Rows</DialogSectionTitle>
-              <GenericButton onClick={() => addRow()}>
-                <SlPlus size={18} />
-                <span>Add row</span>
-              </GenericButton>
-            </DialogSectionHeader>
-            <DialogSectionList>
-              {Object.entries(linksPanel).map(([rowName, row]) => (
-                <li key={rowName}>
-                  <span>{rowName}</span>
-                  <RowControls
-                    toggleRowVisibility={toggleRowVisibility}
-                    isHidden={row.isHidden}
-                    handleRemoveRow={removeRow}
-                    rowName={rowName}
-                  />
-                </li>
-              ))}
-            </DialogSectionList>
-          </DialogSection>
-        </SettingsContent>
-      </Dialog.Portal>
-    </Dialog.Root>
+    <Dialog trigger={TriggerButton}>
+      <SettingsContent>
+        <DialogTitle>Settings</DialogTitle>
+        <VisuallyHidden.Root>
+          <DialogDescription>Edit start page settings</DialogDescription>
+        </VisuallyHidden.Root>
+        <DialogSection>
+          <SettingsSectionHeader>
+            <SettingsSectionTitle>Rows</SettingsSectionTitle>
+            <GenericButton onClick={() => addRow()}>
+              <SlPlus size={18} />
+              <span>Add row</span>
+            </GenericButton>
+          </SettingsSectionHeader>
+          <SettingsSectionList>
+            {Object.entries(linksPanel).map(([rowName, row]) => (
+              <li key={rowName}>
+                <span>{rowName}</span>
+                <RowControls
+                  toggleRowVisibility={toggleRowVisibility}
+                  isHidden={row.isHidden}
+                  handleRemoveRow={removeRow}
+                  rowName={rowName}
+                />
+              </li>
+            ))}
+          </SettingsSectionList>
+        </DialogSection>
+      </SettingsContent>
+    </Dialog>
   );
 };

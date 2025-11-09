@@ -6,7 +6,7 @@ interface IProps {
   size?: number;
 }
 
-export const Icon = ({ iconName, size = 28 }: IProps): ReactElement => {
+export const FaIcon = ({ iconName, size = 28 }: IProps): ReactElement => {
   const IconComponent = iconName ? icons[iconName] : null;
 
   return <IconComponent size={size} />;

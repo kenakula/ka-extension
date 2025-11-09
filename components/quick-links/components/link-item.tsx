@@ -13,7 +13,7 @@ import {
 import { Avatar, ContextMenu } from "~node_modules/radix-ui";
 import { BsFillPencilFill, BsTrash3 } from "~node_modules/react-icons/bs";
 import { IQuickLink } from "~shared/interfaces";
-import { Icon } from "~components/quick-links/components/icon";
+import { FaIcon } from "~components/quick-links/components/fa-icon";
 
 interface IProps {
   link: IQuickLink;
@@ -37,7 +37,7 @@ export const LinkItem = ({
           <Link href={url}>
             {useCustomIcon ? (
               <IconWrapper style={{ color: iconColor }}>
-                <Icon iconName={iconName} />
+                <FaIcon iconName={iconName} />
               </IconWrapper>
             ) : (
               <LinkImage>

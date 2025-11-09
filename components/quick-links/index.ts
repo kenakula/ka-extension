@@ -1,1 +1,1 @@
-export {QuickLinks} from './quick-links'
+export { QuickLinks } from "./quick-links";

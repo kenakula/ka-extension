@@ -1,19 +1,19 @@
 import { ReactElement, useEffect, useState, useTransition } from "react";
-import { useFormikContext } from "~node_modules/formik";
+import { useFormikContext } from "formik";
 import * as icons from "react-icons/fa6";
-import { Dialog, RadioGroup, VisuallyHidden } from "radix-ui";
+import { RadioGroup, VisuallyHidden } from "radix-ui";
 import {
-  DialogOverlay,
   GenericButton,
   IconDialogContent,
   IconDialogHeader,
   RadioIndicator,
   RadioItem,
-} from "~components/quick-links/styles";
+} from "../styles";
 import { IQuickLink } from "~shared/interfaces";
 import { IconType } from "react-icons";
 import { useDebounce } from "~shared/hooks";
-import { Icon } from "~components/quick-links/components/icon";
+import { FaIcon } from "./fa-icon";
+import { Dialog, DialogTitle } from "~components/dialog";
 
 const iconsList = Object.entries(icons);
 
@@ -54,62 +54,59 @@ export const IconSelect = ({ isOpen, onOpenChange }: IProps): ReactElement => {
   }, [debouncedSearchString]);
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={onOpenChange}>
-      <Dialog.Portal>
-        <DialogOverlay />
-        <IconDialogContent>
-          <IconDialogHeader>
-            <VisuallyHidden.Root>
-              <Dialog.Title>Select icon</Dialog.Title>
-            </VisuallyHidden.Root>
-            <label>
-              search
-              <input
-                type="text"
-                value={searchString}
-                onInput={(e) => {
-                  setSearchString(e.currentTarget.value);
-                }}
-              />
-            </label>
-            <div>
-              <span>Choose color</span>
-              <RadioGroup.Root onValueChange={handleColorValueChange}>
-                <RadioItem value="aliceblue">
-                  <RadioIndicator />
-                </RadioItem>
-                <RadioItem value="red">
-                  <RadioIndicator />
-                </RadioItem>
-                <RadioItem value="blue">
-                  <RadioIndicator />
-                </RadioItem>
-              </RadioGroup.Root>
-            </div>
-          </IconDialogHeader>
-          {isTransitioning ? (
-            <span>Loading ...</span>
-          ) : (
-            <ul>
-              {filteredIcons.map(([name]) => (
-                <li key={name}>
-                  <GenericButton
-                    type="button"
-                    style={{ color: iconColor }}
-                    onClick={async () => {
-                      await formik.setFieldValue("iconName", name);
-                      onOpenChange(false);
-                    }}
-                  >
-                    <Icon iconName={name} />
-                    <span>{name.slice(2)}</span>
-                  </GenericButton>
-                </li>
-              ))}
-            </ul>
-          )}
-        </IconDialogContent>
-      </Dialog.Portal>
-    </Dialog.Root>
+    <Dialog isOpen={isOpen} onOpenChange={onOpenChange}>
+      <IconDialogContent>
+        <IconDialogHeader>
+          <VisuallyHidden.Root>
+            <DialogTitle>Select icon</DialogTitle>
+          </VisuallyHidden.Root>
+          <label>
+            search
+            <input
+              type="text"
+              value={searchString}
+              onInput={(e) => {
+                setSearchString(e.currentTarget.value);
+              }}
+            />
+          </label>
+          <div>
+            <span>Choose color</span>
+            <RadioGroup.Root onValueChange={handleColorValueChange}>
+              <RadioItem value="aliceblue">
+                <RadioIndicator />
+              </RadioItem>
+              <RadioItem value="red">
+                <RadioIndicator />
+              </RadioItem>
+              <RadioItem value="blue">
+                <RadioIndicator />
+              </RadioItem>
+            </RadioGroup.Root>
+          </div>
+        </IconDialogHeader>
+        {isTransitioning ? (
+          <span>Loading ...</span>
+        ) : (
+          <ul>
+            {filteredIcons.map(([name]) => (
+              <li key={name}>
+                <GenericButton
+                  type="button"
+                  style={{ color: iconColor }}
+                  onClick={async () => {
+                    await formik.setFieldValue("iconName", name);
+                    onOpenChange(false);
+                  }}
+                >
+                  <FaIcon iconName={name} />
+                  <span>{name.slice(2)}</span>
+                </GenericButton>
+              </li>
+            ))}
+          </ul>
+        )}
+      </IconDialogContent>
+    </Dialog>
   );
 };
