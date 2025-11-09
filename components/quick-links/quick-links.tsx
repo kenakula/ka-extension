@@ -1,25 +1,8 @@
-import { Dialog, Tooltip } from "radix-ui";
 import { ReactElement, useEffect, useRef, useState } from "react";
-import { SlPlus } from "react-icons/sl";
-
-import { CreateForm } from "~components/quick-links/components/create-form";
 import { LinkItem } from "~components/quick-links/components/link-item";
 import { IQuickLink, TQuickLinksPanel } from "~shared/interfaces";
-import { FiSettings } from "react-icons/fi";
 
-import {
-  AddPopover,
-  DialogOverlay,
-  LinkItemStyled,
-  LinksList,
-  LinksRow,
-  LinksSet,
-  AddLinkButton,
-  SettingsButton,
-  SettingsContent,
-  TooltipContent,
-} from "./styles";
-import { Popover } from "~node_modules/radix-ui";
+import { LinksList, LinksRow, LinksSet } from "./styles";
 import { EditLinkDialog } from "~components/quick-links/components/edit-link-dialog";
 import { SettingsDialog } from "~components/quick-links/components/settings-dialog";
 import { AddLink } from "~components/quick-links/components/add-link";
@@ -112,11 +95,8 @@ export const QuickLinks = (): ReactElement => {
   };
 
   const toggleRowVisibility = (rowName: string): void => {
-    console.log("toggle row: ", rowName);
     const setCopy = { ...linksPanel };
-    console.log("original", setCopy);
     setCopy[rowName].isHidden = !setCopy[rowName].isHidden;
-    console.log("modified", setCopy);
     setLinksPanel(setCopy);
   };
 
@@ -147,22 +127,24 @@ export const QuickLinks = (): ReactElement => {
   return (
     <>
       <LinksSet>
-        {Object.entries(linksPanel).map(([name, data]) => (
-          <LinksRow key={name}>
-            <LinksList>
-              {data.links.map((link) => (
-                <LinkItem
-                  key={link.url}
-                  link={link}
-                  setName={name}
-                  handleDeleteLink={handleDeleteLink}
-                  handleEditLink={handleEditLinkClick}
-                />
-              ))}
-              <AddLink rowName={name} addLink={handleAddLink} />
-            </LinksList>
-          </LinksRow>
-        ))}
+        {Object.entries(linksPanel).map(([name, data]) =>
+          !data.isHidden ? (
+            <LinksRow key={name}>
+              <LinksList>
+                {data.links.map((link) => (
+                  <LinkItem
+                    key={link.url}
+                    link={link}
+                    setName={name}
+                    handleDeleteLink={handleDeleteLink}
+                    handleEditLink={handleEditLinkClick}
+                  />
+                ))}
+                <AddLink rowName={name} addLink={handleAddLink} />
+              </LinksList>
+            </LinksRow>
+          ) : null,
+        )}
       </LinksSet>
       <EditLinkDialog
         isOpen={!!editingLink}

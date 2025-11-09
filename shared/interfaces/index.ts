@@ -11,6 +11,7 @@ export interface IQuickLink {
   label?: string;
   iconLink?: string;
   iconName?: string;
+  iconColor?: string;
   useCustomIcon?: boolean;
 }
 

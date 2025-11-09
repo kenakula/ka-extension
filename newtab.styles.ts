@@ -1,4 +1,4 @@
-import { styled } from "styled-components"
+import { styled } from "styled-components";
 
 export const Container = styled.div`
   padding: 2rem;
@@ -8,9 +8,4 @@ export const Container = styled.div`
   align-self: center;
   justify-content: center;
   width: 100%;
-`
-
-export const TimeLabel = styled.h1`
-  margin: 0 0 1rem;
-  font-size: 68px;
-`
+`;

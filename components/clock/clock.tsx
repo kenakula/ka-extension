@@ -1,5 +1,5 @@
 import { ReactElement, useEffect, useState } from "react";
-import { TimeLabel } from "~newtab.styles";
+import { TimeLabel } from "./styles";
 
 const TIME_OPTIONS: Intl.DateTimeFormatOptions = {
   hour: "numeric",

@@ -1,17 +1,7 @@
 import { ReactElement } from "react";
-import {
-  AddPopover,
-  LinksRowControls,
-  AddLinkButton,
-  RemoveRowButton,
-  TooltipContent,
-  GenericButton,
-} from "../styles";
-import { Popover, Tooltip } from "radix-ui";
-import { SlMinus, SlPlus } from "react-icons/sl";
+import { LinksRowControls, RemoveRowButton, GenericButton } from "../styles";
+import { SlMinus } from "react-icons/sl";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { CreateForm } from "./create-form";
-import { IQuickLink } from "~shared/interfaces";
 
 interface IProps {
   handleRemoveRow: (rowName: string) => void;

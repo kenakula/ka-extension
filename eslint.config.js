@@ -1,7 +1,7 @@
-import stylistic from "@stylistic/eslint-plugin"
-import simpleImportSort from "eslint-plugin-simple-import-sort"
-import globals from "globals"
-import tseslint from "typescript-eslint"
+import stylistic from "@stylistic/eslint-plugin";
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import globals from "globals";
+import tseslint from "typescript-eslint";
 
 const eslintConfig = [
   ...tseslint.configs.recommended,
@@ -11,25 +11,25 @@ const eslintConfig = [
       ecmaVersion: 2022,
       parserOptions: {
         projectService: true,
-        tsconfigRootDir: import.meta.dirname
+        tsconfigRootDir: import.meta.dirname,
       },
       globals: {
         ...globals.browser,
         ...globals.jest,
-        ...globals.node
-      }
+        ...globals.node,
+      },
     },
     plugins: {
       "simple-import-sort": simpleImportSort,
-      "@stylistic": stylistic
+      "@stylistic": stylistic,
     },
     rules: {
       "no-undef": "error",
       "max-len": [
         "error",
         {
-          code: 120
-        }
+          code: 120,
+        },
       ],
 
       "@typescript-eslint/triple-slash-reference": "off",
@@ -47,8 +47,8 @@ const eslintConfig = [
         "error",
         {
           allowHigherOrderFunctions: true,
-          allowIIFEs: true
-        }
+          allowIIFEs: true,
+        },
       ],
 
       "@stylistic/semi": ["error", "always"],
@@ -62,12 +62,12 @@ const eslintConfig = [
       "@stylistic/no-multiple-empty-lines": ["error", { max: 1 }],
 
       "simple-import-sort/imports": "error",
-      "simple-import-sort/exports": "error"
-    }
+      "simple-import-sort/exports": "error",
+    },
   },
   {
-    ignores: ["node_modules/**", "out/**", "build/**", "dist/**", ".plasmo"]
-  }
-]
+    ignores: ["node_modules/**", "out/**", "build/**", "dist/**", ".plasmo"],
+  },
+];
 
-export default eslintConfig
+export default eslintConfig;
