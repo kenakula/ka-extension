@@ -5,16 +5,24 @@ import { SlPlus } from "react-icons/sl";
 import { CreateForm } from "~components/quick-links/components/create-form";
 import { LinkItem } from "~components/quick-links/components/link-item";
 import { IQuickLink, TQuickLinksPanel } from "~shared/interfaces";
+import { FiSettings } from "react-icons/fi";
 
 import {
-  EditDialog,
-  GenericButton,
+  AddPopover,
+  DialogOverlay,
+  LinkItemStyled,
   LinksList,
   LinksRow,
   LinksSet,
+  AddLinkButton,
+  SettingsButton,
+  SettingsContent,
   TooltipContent,
 } from "./styles";
-import { RowControls } from "~components/quick-links/components/row-controls";
+import { Popover } from "~node_modules/radix-ui";
+import { EditLinkDialog } from "~components/quick-links/components/edit-link-dialog";
+import { SettingsDialog } from "~components/quick-links/components/settings-dialog";
+import { AddLink } from "~components/quick-links/components/add-link";
 
 const STORAGE_LINKS_KEY = "kp_quick_links";
 
@@ -23,12 +31,31 @@ const DEFAULT_SET: TQuickLinksPanel = {
     links: [
       {
         url: "https://yandex.ru/maps",
+        label: "",
+        iconLink: "",
+        iconName: "",
+        useCustomIcon: false,
       },
       {
         url: "https://kinopoisk.ru",
+        label: "",
+        iconLink: "",
+        iconName: "",
+        useCustomIcon: false,
       },
       {
         url: "https://youtube.com",
+        label: "",
+        iconLink: "",
+        iconName: "",
+        useCustomIcon: false,
+      },
+      {
+        url: "https://yandex.ru/pogoda/ru/saint-petersburg",
+        label: "",
+        iconLink: "",
+        iconName: "",
+        useCustomIcon: false,
       },
     ],
     isHidden: false,
@@ -84,14 +111,23 @@ export const QuickLinks = (): ReactElement => {
     setEditingRow(null);
   };
 
-  const handleAddRow = () => {
-    const setName = `newSet[${Date.now()}]`;
-    setLinksPanel({ ...linksPanel, [setName]: { links: [], isHidden: false } });
+  const toggleRowVisibility = (rowName: string): void => {
+    console.log("toggle row: ", rowName);
+    const setCopy = { ...linksPanel };
+    console.log("original", setCopy);
+    setCopy[rowName].isHidden = !setCopy[rowName].isHidden;
+    console.log("modified", setCopy);
+    setLinksPanel(setCopy);
   };
 
-  const handleRemoveRow = (setName: string): void => {
+  const handleAddRow = (rowName?: string) => {
+    const name = rowName ?? `newSet[${Date.now()}]`;
+    setLinksPanel({ ...linksPanel, [name]: { links: [], isHidden: false } });
+  };
+
+  const handleRemoveRow = (rowName: string): void => {
     const setCopy = { ...linksPanel };
-    delete setCopy[setName];
+    delete setCopy[rowName];
     setLinksPanel(setCopy);
   };
 
@@ -123,43 +159,23 @@ export const QuickLinks = (): ReactElement => {
                   handleEditLink={handleEditLinkClick}
                 />
               ))}
+              <AddLink rowName={name} addLink={handleAddLink} />
             </LinksList>
-            <RowControls
-              handleAddLink={handleAddLink}
-              handleRemoveRow={handleRemoveRow}
-              rowName={name}
-              isRowEmpty={!data.links.length}
-            />
           </LinksRow>
         ))}
       </LinksSet>
-      <div style={{ display: "flex", columnGap: "10px", marginTop: 20 }}>
-        <Tooltip.Provider>
-          <Tooltip.Root>
-            <Tooltip.Trigger asChild>
-              <GenericButton type="button" onClick={handleAddRow}>
-                <SlPlus size={26} />
-              </GenericButton>
-            </Tooltip.Trigger>
-            <Tooltip.Portal>
-              <TooltipContent side="bottom" sideOffset={20}>
-                add new row
-              </TooltipContent>
-            </Tooltip.Portal>
-          </Tooltip.Root>
-        </Tooltip.Provider>
-      </div>
-      <Dialog.Root open={!!editingLink} onOpenChange={handleCloseEditModal}>
-        <Dialog.Portal>
-          <EditDialog>
-            <Dialog.Title>Edit link</Dialog.Title>
-            <CreateForm
-              handleSubmit={handleEditLink}
-              defaultValues={editingLink}
-            />
-          </EditDialog>
-        </Dialog.Portal>
-      </Dialog.Root>
+      <EditLinkDialog
+        isOpen={!!editingLink}
+        onOpenChange={handleCloseEditModal}
+        handleSubmit={handleEditLink}
+        defaultValues={editingLink}
+      />
+      <SettingsDialog
+        toggleRowVisibility={toggleRowVisibility}
+        linksPanel={linksPanel}
+        addRow={handleAddRow}
+        removeRow={handleRemoveRow}
+      />
     </>
   );
 };
