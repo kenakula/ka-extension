@@ -1,11 +1,11 @@
 import { ReactElement, useEffect, useRef, useState } from "react";
-import { LinkItem } from "~components/quick-links/components/link-item";
-import { IQuickLink, TQuickLinksPanel } from "~shared/interfaces";
+import { LinkItem } from "./components/link-item/link-item";
+import { IQuickLink, TQuickLinksPanel } from "@shared/interfaces";
 
 import { LinksList, LinksRow, LinksSet } from "./styles";
-import { EditLinkDialog } from "~components/quick-links/components/edit-link-dialog";
-import { SettingsDialog } from "~components/quick-links/components/settings-dialog";
-import { AddLink } from "~components/quick-links/components/add-link";
+import { EditLinkDialog } from "./components/edit-link-dialog/edit-link-dialog";
+import { SettingsDialog } from "./components/settings-dialog/settings-dialog";
+import { AddLinkButton } from "./components/add-link-button/add-link-button";
 
 const STORAGE_LINKS_KEY = "kp_quick_links";
 
@@ -140,7 +140,7 @@ export const QuickLinks = (): ReactElement => {
                     handleEditLink={handleEditLinkClick}
                   />
                 ))}
-                <AddLink rowName={name} addLink={handleAddLink} />
+                <AddLinkButton rowName={name} addLink={handleAddLink} />
               </LinksList>
             </LinksRow>
           ) : null,

@@ -1,12 +1,12 @@
 import { ReactElement, useState } from "react";
 
-import { Button } from "~components/button";
-import { FieldContainer, FormStyled } from "../../styles";
+import { Button } from "@components/button";
+import { FieldContainer, FormStyled } from "./styles";
 import { Field, Formik } from "formik";
-import { IQuickLink } from "~shared/interfaces";
-import { IconSelect } from "../icon-select";
+import { IQuickLink } from "@shared/interfaces";
+import { IconSelect } from "../icon-select/icon-select";
 import { DEFAULT_VALUES } from "./constants";
-import { FaIcon } from "../fa-icon";
+import { Icon } from "@components/icon/icon";
 
 interface IProps {
   handleSubmit: (values: IQuickLink, rowName?: string) => void;
@@ -67,7 +67,7 @@ export const CreateForm = ({
               onClick={handleOpenIconModal}
             >
               {values.iconName ? (
-                <FaIcon iconName={values.iconName} />
+                <Icon.FaIcon iconName={values.iconName} />
               ) : (
                 <span>choose icon</span>
               )}
@@ -77,11 +77,6 @@ export const CreateForm = ({
               onOpenChange={handleCloseEditModal}
             />
           </FieldContainer>
-
-          {/*<FieldContainer>*/}
-          {/*  <label htmlFor="iconLink">iconLink</label>*/}
-          {/*  <Field id="iconLink" name="iconLink" />*/}
-          {/*</FieldContainer>*/}
 
           <FieldContainer>
             <label htmlFor="useCustomIcon">use custom icon</label>

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { Container, ErrorMessage, ServicesList } from "~popup.styles";
+import { Container, ErrorMessage, ServicesList } from "./popup.styles";
 
-import "~popup.css";
-import type { IServiceItem } from "~shared/interfaces";
-import { ServiceItem } from "~components/service-item/service-item";
+import "./popup.css";
+import type { IServiceItem } from "@shared/interfaces";
+import { ServiceItem } from "@components/service-item/service-item";
 
 type Tab = chrome.tabs.Tab;
 

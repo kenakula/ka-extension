@@ -1,15 +1,7 @@
 import { ReactElement } from "react";
-import {
-  SettingsSectionHeader,
-  SettingsSectionList,
-  SettingsSectionTitle,
-  GenericButton,
-  SettingsButton,
-  SettingsContent,
-} from "../styles";
 import { FiSettings } from "react-icons/fi";
 import { VisuallyHidden } from "radix-ui";
-import { TQuickLinksPanel } from "~shared/interfaces";
+import { TQuickLinksPanel } from "@shared/interfaces";
 import { RowControls } from "./row-controls";
 import { SlPlus } from "react-icons/sl";
 import {
@@ -17,7 +9,15 @@ import {
   DialogDescription,
   DialogSection,
   DialogTitle,
-} from "~components/dialog";
+} from "@components/dialog";
+import { GenericButton } from "@components/button";
+import {
+  SettingsButton,
+  SettingsContent,
+  SettingsSectionHeader,
+  SettingsSectionList,
+  SettingsSectionTitle,
+} from "./styles";
 
 interface IProps {
   addRow: (rowName?: string) => void;

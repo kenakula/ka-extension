@@ -1,4 +1,4 @@
-import { styled } from "~node_modules/styled-components";
+import { styled } from "styled-components";
 
 export const ServicesItem = styled.li`
   padding: 8px 16px;
@@ -6,7 +6,7 @@ export const ServicesItem = styled.li`
   align-items: center;
   column-gap: 10px;
   background-color: transparent;
-  
+
   &:nth-child(2n) {
     background-color: aliceblue;
   }

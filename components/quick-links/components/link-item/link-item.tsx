@@ -1,6 +1,6 @@
 import { ReactElement } from "react";
 
-import { getFaviconUrl } from "~components/quick-links/helpers";
+import { getFaviconUrl } from "@components/quick-links/helpers";
 import {
   ContextItem,
   ContextMenuContainer,
@@ -9,11 +9,12 @@ import {
   LinkImage,
   LinkItemStyled,
   LinkLabel,
-} from "~components/quick-links/styles";
-import { Avatar, ContextMenu } from "~node_modules/radix-ui";
-import { BsFillPencilFill, BsTrash3 } from "~node_modules/react-icons/bs";
-import { IQuickLink } from "~shared/interfaces";
-import { FaIcon } from "~components/quick-links/components/fa-icon";
+} from "./styles";
+import { Avatar, ContextMenu } from "radix-ui";
+import { BsFillPencilFill, BsTrash3 } from "react-icons/bs";
+import { IQuickLink } from "@shared/interfaces";
+import { useDraggable } from "@dnd-kit/core";
+import { Icon } from "@components/icon/icon";
 
 interface IProps {
   link: IQuickLink;
@@ -30,14 +31,29 @@ export const LinkItem = ({
 }: IProps): ReactElement => {
   const { url, label, iconName, useCustomIcon, iconColor } = link;
 
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: url,
+  });
+  const style = transform
+    ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+      }
+    : undefined;
+
   return (
-    <LinkItemStyled>
+    <LinkItemStyled
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+    >
       <ContextMenu.Root>
         <ContextMenu.Trigger>
+          {/*<Link href={url}>*/}
           <Link href={url}>
             {useCustomIcon ? (
               <IconWrapper style={{ color: iconColor }}>
-                <FaIcon iconName={iconName} />
+                <Icon.FaIcon iconName={iconName} />
               </IconWrapper>
             ) : (
               <LinkImage>

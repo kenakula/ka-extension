@@ -1,9 +1,9 @@
 import { ReactElement } from "react";
 import { VisuallyHidden } from "radix-ui";
-import { CreateForm } from "./create-form/create-form";
-import { EditDialog } from "../styles";
-import { IQuickLink } from "~shared/interfaces";
-import { Dialog, DialogDescription, DialogTitle } from "~components/dialog";
+import { CreateForm } from "../create-form/create-form";
+import { EditDialog } from "./styles";
+import { IQuickLink } from "@shared/interfaces";
+import { Dialog, DialogDescription, DialogTitle } from "@components/dialog";
 
 interface IProps {
   isOpen: boolean;

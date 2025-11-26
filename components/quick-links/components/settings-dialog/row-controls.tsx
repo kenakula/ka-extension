@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { LinksRowControls, RemoveRowButton, GenericButton } from "../styles";
+import { LinksRowControls, RemoveRowButton, GenericButton } from "../../styles";
 import { SlMinus } from "react-icons/sl";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 

@@ -1,4 +1,4 @@
-import { IQuickLink } from "~shared/interfaces";
+import { IQuickLink } from "@shared/interfaces";
 
 export const DEFAULT_VALUES: IQuickLink = {
   url: "",

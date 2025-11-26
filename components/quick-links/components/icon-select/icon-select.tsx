@@ -3,17 +3,17 @@ import { useFormikContext } from "formik";
 import * as icons from "react-icons/fa6";
 import { RadioGroup, VisuallyHidden } from "radix-ui";
 import {
-  GenericButton,
   IconDialogContent,
   IconDialogHeader,
   RadioIndicator,
   RadioItem,
-} from "../styles";
-import { IQuickLink } from "~shared/interfaces";
+} from "./styles";
+import { IQuickLink } from "@shared/interfaces";
 import { IconType } from "react-icons";
-import { useDebounce } from "~shared/hooks";
-import { FaIcon } from "./fa-icon";
-import { Dialog, DialogTitle } from "~components/dialog";
+import { useDebounce } from "@shared/hooks";
+import { Dialog, DialogTitle } from "@components/dialog";
+import { Icon } from "@components/icon/icon";
+import { GenericButton } from "@components/button";
 
 const iconsList = Object.entries(icons);
 
@@ -99,7 +99,7 @@ export const IconSelect = ({ isOpen, onOpenChange }: IProps): ReactElement => {
                     onOpenChange(false);
                   }}
                 >
-                  <FaIcon iconName={name} />
+                  <Icon.FaIcon iconName={name} />
                   <span>{name.slice(2)}</span>
                 </GenericButton>
               </li>
