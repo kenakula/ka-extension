@@ -46,7 +46,7 @@ export const LinkItemStyled = styled.li`
   min-width: 42px;
 `;
 
-export const Link = styled.a`
+export const LinkButton = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -59,6 +59,9 @@ export const Link = styled.a`
   border-radius: 16px;
   min-width: 67px;
   min-height: 67px;
+  background-color: transparent;
+  border-color: transparent;
+  cursor: pointer;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);

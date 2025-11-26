@@ -8,8 +8,6 @@ export const LinksSet = styled.div`
   max-width: 70%;
 `;
 
-export const LinksRow = styled.div``;
-
 export const LinksRowControls = styled.div`
   display: flex;
   align-items: center;

@@ -1,6 +1,7 @@
 import { Icon } from '@components/icon/icon';
 import { getFaviconUrl } from '@components/quick-links/helpers';
-import { useDraggable } from '@dnd-kit/core';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import { IQuickLink } from '@shared/interfaces';
 import { Avatar, ContextMenu } from 'radix-ui';
 import { ReactElement } from 'react';
@@ -10,7 +11,7 @@ import {
   ContextItem,
   ContextMenuContainer,
   IconWrapper,
-  Link,
+  LinkButton,
   LinkImage,
   LinkItemStyled,
   LinkLabel,
@@ -31,29 +32,25 @@ export const LinkItem = ({
 }: IProps): ReactElement => {
   const { url, label, iconName, useCustomIcon, iconColor } = link;
 
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: url,
-  });
-  const style = transform
-    ? {
-      transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-    }
-    : undefined;
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: url });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  const handleLinkButtonClick = (): void => {
+    window.location.href = link.url;
+  };
 
   return (
-    <LinkItemStyled
-      ref={setNodeRef}
-      style={style}
-      {...listeners}
-      {...attributes}
-    >
+    <LinkItemStyled ref={setNodeRef} style={style} {...attributes} {...listeners}>
       <ContextMenu.Root>
         <ContextMenu.Trigger>
-          {/*<Link href={url}>*/}
-          <Link href={url}>
+          <LinkButton onClick={handleLinkButtonClick}>
             {useCustomIcon ? (
               <IconWrapper style={{ color: iconColor }}>
-                <Icon.FaIcon iconName={iconName} />
+                <Icon.FaIcon iconName={iconName}/>
               </IconWrapper>
             ) : (
               <LinkImage>
@@ -65,16 +62,16 @@ export const LinkItem = ({
               </LinkImage>
             )}
             {label ? <LinkLabel>{label}</LinkLabel> : null}
-          </Link>
+          </LinkButton>
         </ContextMenu.Trigger>
         <ContextMenu.Portal>
           <ContextMenuContainer>
             <ContextItem onSelect={() => handleDeleteLink(setName, url)}>
-              <BsTrash3 />
+              <BsTrash3/>
               <span>Delete</span>
             </ContextItem>
             <ContextItem onSelect={() => handleEditLink(setName, link)}>
-              <BsFillPencilFill />
+              <BsFillPencilFill/>
               <span>Edit</span>
             </ContextItem>
           </ContextMenuContainer>

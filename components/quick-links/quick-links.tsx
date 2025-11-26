@@ -1,16 +1,15 @@
 import { IQuickLink, TQuickLinksPanel } from '@shared/interfaces';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 
-import { AddLinkButton } from './components/add-link-button/add-link-button';
 import { EditLinkDialog } from './components/edit-link-dialog/edit-link-dialog';
-import { LinkItem } from './components/link-item/link-item';
+import { LinksRow } from './components/links-row';
 import { SettingsDialog } from './components/settings-dialog/settings-dialog';
-import { LinksList, LinksRow, LinksSet } from './styles';
+import { LinksSet } from './styles';
 
 const STORAGE_LINKS_KEY = 'kp_quick_links';
 
 const DEFAULT_SET: TQuickLinksPanel = {
-  default: {
+  defaultSet: {
     links: [
       {
         url: 'https://yandex.ru/maps',
@@ -52,6 +51,41 @@ export const QuickLinks = (): ReactElement => {
 
   const [editingLink, setEditingLink] = useState<IQuickLink | null>(null);
   const [editingRow, setEditingRow] = useState<string | null>(null);
+
+  const handleSort = (setName: string, from: number, to: number): void => {
+    const links = linksPanel[setName].links.slice();
+    const isRtl = to > from;
+    const temp = links[from];
+
+    if (isRtl) {
+      let i = from + 1;
+
+      while (i <= to) {
+        links[i - 1] = links[i];
+
+        i++;
+      }
+
+      links[to] = temp;
+    } else {
+      let i = from - 1;
+
+      while (i >= to) {
+        links[i + 1] = links[i];
+
+        i--;
+      }
+
+      links[to] = temp;
+    }
+
+    setLinksPanel(prev => {
+      const row = prev[setName];
+      row.links = links;
+
+      return { ...prev, [setName]: row };
+    });
+  };
 
   const handleCloseEditModal = (state: boolean): void => {
     if (!state) {
@@ -128,22 +162,15 @@ export const QuickLinks = (): ReactElement => {
     <>
       <LinksSet>
         {Object.entries(linksPanel).map(([name, data]) =>
-          !data.isHidden ? (
-            <LinksRow key={name}>
-              <LinksList>
-                {data.links.map((link) => (
-                  <LinkItem
-                    key={link.url}
-                    link={link}
-                    setName={name}
-                    handleDeleteLink={handleDeleteLink}
-                    handleEditLink={handleEditLinkClick}
-                  />
-                ))}
-                <AddLinkButton rowName={name} addLink={handleAddLink}/>
-              </LinksList>
-            </LinksRow>
-          ) : null,
+          !data.isHidden ? <LinksRow
+            handleSort={handleSort}
+            key={name}
+            setName={name}
+            list={data.links}
+            handleAdd={handleAddLink}
+            handleDelete={handleDeleteLink}
+            handleEdit={handleEditLinkClick}
+          /> : null,
         )}
       </LinksSet>
       <EditLinkDialog
