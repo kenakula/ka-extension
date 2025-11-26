@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from 'react';
 
 // Наш хук
 export const useDebounce = <T>(value: T, delay: number): T => {
@@ -22,7 +22,7 @@ export const useDebounce = <T>(value: T, delay: number): T => {
       // Что бы сложить это воедино: если пользователь печатает что-то внутри ...
       // ... нашего приложения в поле поиска, мы не хотим, чтобы debouncedValue...
       // ... не менялось до тех пор, пока он не прекратит печатать дольше, чем 500ms.
-      return () => {
+      return (): void => {
         clearTimeout(handler);
       };
     },

@@ -1,2 +1,2 @@
-export { Button } from "./button";
-export { GenericButton } from "./styles";
+export { Button } from './button';
+export { GenericButton } from './styles';

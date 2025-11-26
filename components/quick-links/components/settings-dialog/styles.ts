@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Dialog } from "radix-ui";
+import { Dialog } from 'radix-ui';
+import styled from 'styled-components';
 
 export const SettingsButton = styled(Dialog.Trigger)`
   position: absolute;

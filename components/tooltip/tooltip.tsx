@@ -1,6 +1,7 @@
-import { PropsWithChildren, ReactElement } from "react";
-import { Tooltip as LibTooltip } from "radix-ui";
-import { TooltipContent } from "./styles";
+import { Tooltip as LibTooltip } from 'radix-ui';
+import { PropsWithChildren, ReactElement } from 'react';
+
+import { TooltipContent } from './styles';
 
 interface IProps extends PropsWithChildren {
   text: string;

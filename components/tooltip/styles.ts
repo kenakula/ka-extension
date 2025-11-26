@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Tooltip } from "radix-ui";
+import { Tooltip } from 'radix-ui';
+import styled from 'styled-components';
 
 export const TooltipContent = styled(Tooltip.Content)`
   background-color: rgba(240, 248, 255, 0.1);

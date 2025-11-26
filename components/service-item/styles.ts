@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 export const ServicesItem = styled.li`
   padding: 8px 16px;

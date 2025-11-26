@@ -1,7 +1,8 @@
-import type { ReactElement } from "react";
-import { Button } from "@components/button/button";
-import type { IServiceItem } from "@shared/interfaces";
-import { ServiceControls, ServiceName, ServicesItem } from "./styles";
+import { Button } from '@components/button/button';
+import type { IServiceItem } from '@shared/interfaces';
+import type { ReactElement } from 'react';
+
+import { ServiceControls, ServiceName, ServicesItem } from './styles';
 
 type Tab = chrome.tabs.Tab;
 

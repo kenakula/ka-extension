@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 export const BaseButton = styled.button`
   padding: 5px 15px;

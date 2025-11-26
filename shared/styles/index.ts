@@ -1,2 +1,2 @@
-export { GlobalStyles } from "./global-styles";
-export { NewTabContainer } from "./newtab.styles";
+export { GlobalStyles } from './global-styles';
+export { NewTabContainer } from './newtab.styles';

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Popover } from "radix-ui";
+import { Popover } from 'radix-ui';
+import styled from 'styled-components';
 
 export const AddPopover = styled(Popover.Content)`
   background-color: rgba(240, 248, 255, 0.23);

@@ -1,6 +1,7 @@
-import { ComponentType, PropsWithChildren, ReactElement } from "react";
-import { DialogOverlay } from "./styles";
-import { Dialog as LibDialog } from "radix-ui";
+import { Dialog as LibDialog } from 'radix-ui';
+import { ComponentType, PropsWithChildren, ReactElement } from 'react';
+
+import { DialogOverlay } from './styles';
 
 interface IProps extends PropsWithChildren {
   isOpen?: boolean;

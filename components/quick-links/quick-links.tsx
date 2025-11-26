@@ -1,43 +1,43 @@
-import { ReactElement, useEffect, useRef, useState } from "react";
-import { LinkItem } from "./components/link-item/link-item";
-import { IQuickLink, TQuickLinksPanel } from "@shared/interfaces";
+import { IQuickLink, TQuickLinksPanel } from '@shared/interfaces';
+import { ReactElement, useEffect, useRef, useState } from 'react';
 
-import { LinksList, LinksRow, LinksSet } from "./styles";
-import { EditLinkDialog } from "./components/edit-link-dialog/edit-link-dialog";
-import { SettingsDialog } from "./components/settings-dialog/settings-dialog";
-import { AddLinkButton } from "./components/add-link-button/add-link-button";
+import { AddLinkButton } from './components/add-link-button/add-link-button';
+import { EditLinkDialog } from './components/edit-link-dialog/edit-link-dialog';
+import { LinkItem } from './components/link-item/link-item';
+import { SettingsDialog } from './components/settings-dialog/settings-dialog';
+import { LinksList, LinksRow, LinksSet } from './styles';
 
-const STORAGE_LINKS_KEY = "kp_quick_links";
+const STORAGE_LINKS_KEY = 'kp_quick_links';
 
 const DEFAULT_SET: TQuickLinksPanel = {
   default: {
     links: [
       {
-        url: "https://yandex.ru/maps",
-        label: "",
-        iconLink: "",
-        iconName: "",
+        url: 'https://yandex.ru/maps',
+        label: '',
+        iconLink: '',
+        iconName: '',
         useCustomIcon: false,
       },
       {
-        url: "https://kinopoisk.ru",
-        label: "",
-        iconLink: "",
-        iconName: "",
+        url: 'https://kinopoisk.ru',
+        label: '',
+        iconLink: '',
+        iconName: '',
         useCustomIcon: false,
       },
       {
-        url: "https://youtube.com",
-        label: "",
-        iconLink: "",
-        iconName: "",
+        url: 'https://youtube.com',
+        label: '',
+        iconLink: '',
+        iconName: '',
         useCustomIcon: false,
       },
       {
-        url: "https://yandex.ru/pogoda/ru/saint-petersburg",
-        label: "",
-        iconLink: "",
-        iconName: "",
+        url: 'https://yandex.ru/pogoda/ru/saint-petersburg',
+        label: '',
+        iconLink: '',
+        iconName: '',
         useCustomIcon: false,
       },
     ],
@@ -68,7 +68,7 @@ export const QuickLinks = (): ReactElement => {
     setLinksPanel(panelCopy);
   };
 
-  const handleEditLinkClick = (setName: string, link: IQuickLink) => {
+  const handleEditLinkClick = (setName: string, link: IQuickLink): void => {
     setEditingLink(link);
     setEditingRow(setName);
   };
@@ -100,7 +100,7 @@ export const QuickLinks = (): ReactElement => {
     setLinksPanel(setCopy);
   };
 
-  const handleAddRow = (rowName?: string) => {
+  const handleAddRow = (rowName?: string): void => {
     const name = rowName ?? `newSet[${Date.now()}]`;
     setLinksPanel({ ...linksPanel, [name]: { links: [], isHidden: false } });
   };
@@ -140,7 +140,7 @@ export const QuickLinks = (): ReactElement => {
                     handleEditLink={handleEditLinkClick}
                   />
                 ))}
-                <AddLinkButton rowName={name} addLink={handleAddLink} />
+                <AddLinkButton rowName={name} addLink={handleAddLink}/>
               </LinksList>
             </LinksRow>
           ) : null,

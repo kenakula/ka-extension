@@ -1,8 +1,9 @@
-import { ReactElement } from "react";
-import { IQuickLink } from "@shared/interfaces";
-import { LinkItem } from "../link-item/link-item";
-import { AddLinkButton } from "../add-link-button/add-link-button";
-import { LinksList } from "./styles";
+import { IQuickLink } from '@shared/interfaces';
+import { ReactElement } from 'react';
+
+import { AddLinkButton } from '../add-link-button/add-link-button';
+import { LinkItem } from '../link-item/link-item';
+import { LinksList } from './styles';
 
 interface IProps {
   list: IQuickLink[];

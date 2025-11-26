@@ -1,4 +1,4 @@
-import { styled } from "styled-components";
+import { styled } from 'styled-components';
 
 interface IContainerStyles {
   $isInvalid?: boolean;
@@ -6,10 +6,10 @@ interface IContainerStyles {
 
 export const Container = styled.div<IContainerStyles>`
   position: relative;
-  padding: ${({$isInvalid}) => $isInvalid ? '22px 0 5px' : '5px 0'};
+  padding: ${({ $isInvalid }) => $isInvalid ? '22px 0 5px' : '5px 0'};
   min-width: 350px;
-  border: 2px solid ${({$isInvalid}) => $isInvalid ? 'tomato' : 'transparent'};
-`
+  border: 2px solid ${({ $isInvalid }) => $isInvalid ? 'tomato' : 'transparent'};
+`;
 
 export const ErrorMessage = styled.span`
   position: absolute;

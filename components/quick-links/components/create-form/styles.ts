@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Form } from "formik";
+import { Form } from 'formik';
+import styled from 'styled-components';
 
 export const FormStyled = styled(Form)`
   display: flex;

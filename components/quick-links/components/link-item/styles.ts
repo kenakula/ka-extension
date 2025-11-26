@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Avatar, ContextMenu } from "radix-ui";
+import { Avatar, ContextMenu } from 'radix-ui';
+import styled from 'styled-components';
 
 export const ContextMenuContainer = styled(ContextMenu.Content)`
   background: rgba(77, 77, 77, 0.8);

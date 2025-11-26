@@ -1,10 +1,11 @@
-import { ReactElement } from "react";
-import { Popover } from "radix-ui";
-import { AddPopover, LinkItemStyled, StyledAddLinkButton } from "./styles";
-import { SlPlus } from "react-icons/sl";
-import { CreateForm } from "../create-form/create-form";
-import { IQuickLink } from "@shared/interfaces";
-import { Tooltip } from "@components/tooltip";
+import { Tooltip } from '@components/tooltip';
+import { IQuickLink } from '@shared/interfaces';
+import { Popover } from 'radix-ui';
+import { ReactElement } from 'react';
+import { SlPlus } from 'react-icons/sl';
+
+import { CreateForm } from '../create-form/create-form';
+import { AddPopover, LinkItemStyled, StyledAddLinkButton } from './styles';
 
 interface IProps {
   rowName: string;

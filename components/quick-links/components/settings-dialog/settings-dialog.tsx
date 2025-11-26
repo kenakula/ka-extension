@@ -1,23 +1,24 @@
-import { ReactElement } from "react";
-import { FiSettings } from "react-icons/fi";
-import { VisuallyHidden } from "radix-ui";
-import { TQuickLinksPanel } from "@shared/interfaces";
-import { RowControls } from "./row-controls";
-import { SlPlus } from "react-icons/sl";
+import { GenericButton } from '@components/button';
 import {
   Dialog,
   DialogDescription,
   DialogSection,
   DialogTitle,
-} from "@components/dialog";
-import { GenericButton } from "@components/button";
+} from '@components/dialog';
+import { TQuickLinksPanel } from '@shared/interfaces';
+import { VisuallyHidden } from 'radix-ui';
+import { ReactElement } from 'react';
+import { FiSettings } from 'react-icons/fi';
+import { SlPlus } from 'react-icons/sl';
+
+import { RowControls } from './row-controls';
 import {
   SettingsButton,
   SettingsContent,
   SettingsSectionHeader,
   SettingsSectionList,
   SettingsSectionTitle,
-} from "./styles";
+} from './styles';
 
 interface IProps {
   addRow: (rowName?: string) => void;

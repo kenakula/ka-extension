@@ -1,5 +1,5 @@
-import { ReactElement } from "react";
-import * as icons from "react-icons/fa6";
+import { ReactElement } from 'react';
+import * as icons from 'react-icons/fa6';
 
 interface IFaIconProps {
   iconName: string;

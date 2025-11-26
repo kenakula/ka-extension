@@ -1,12 +1,12 @@
-import { ReactElement, useState } from "react";
+import { Button } from '@components/button';
+import { Icon } from '@components/icon/icon';
+import { IQuickLink } from '@shared/interfaces';
+import { Field, Formik } from 'formik';
+import { ReactElement, useState } from 'react';
 
-import { Button } from "@components/button";
-import { FieldContainer, FormStyled } from "./styles";
-import { Field, Formik } from "formik";
-import { IQuickLink } from "@shared/interfaces";
-import { IconSelect } from "../icon-select/icon-select";
-import { DEFAULT_VALUES } from "./constants";
-import { Icon } from "@components/icon/icon";
+import { IconSelect } from '../icon-select/icon-select';
+import { DEFAULT_VALUES } from './constants';
+import { FieldContainer, FormStyled } from './styles';
 
 interface IProps {
   handleSubmit: (values: IQuickLink, rowName?: string) => void;
@@ -30,7 +30,7 @@ export const CreateForm = ({
   const handleFormSubmit = (values: IQuickLink): void => {
     let urlValue = values.url;
 
-    if (!urlValue.startsWith("https://")) {
+    if (!urlValue.startsWith('https://')) {
       urlValue = `https://${urlValue}`;
       values.url = urlValue;
     }

@@ -1,1 +1,1 @@
-export { LinksRow } from "./links-row";
+export { LinksRow } from './links-row';

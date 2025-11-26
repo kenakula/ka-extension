@@ -1,7 +1,8 @@
-import { ReactElement } from "react";
-import { LinksRowControls, RemoveRowButton, GenericButton } from "../../styles";
-import { SlMinus } from "react-icons/sl";
-import { FiEye, FiEyeOff } from "react-icons/fi";
+import { ReactElement } from 'react';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
+import { SlMinus } from 'react-icons/sl';
+
+import { GenericButton, LinksRowControls, RemoveRowButton } from '../../styles';
 
 interface IProps {
   handleRemoveRow: (rowName: string) => void;
@@ -24,7 +25,7 @@ export const RowControls = ({
       </RemoveRowButton>
       <GenericButton onClick={() => toggleRowVisibility(rowName)}>
         {isHidden ? <FiEye size={18} /> : <FiEyeOff size={18} />}
-        <span>{isHidden ? "Show" : "Hide"}</span>
+        <span>{isHidden ? 'Show' : 'Hide'}</span>
       </GenericButton>
     </LinksRowControls>
   );

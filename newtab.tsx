@@ -1,11 +1,11 @@
-import { ReactElement, useLayoutEffect } from "react";
-import { QuickLinks } from "@components/quick-links";
-import { Clock } from "@components/clock";
-import { NewTabContainer, GlobalStyles } from "@shared/styles";
+import { Clock } from '@components/clock';
+import { QuickLinks } from '@components/quick-links';
+import { GlobalStyles, NewTabContainer } from '@shared/styles';
+import { ReactElement, useLayoutEffect } from 'react';
 
 const NewTab = (): ReactElement => {
   useLayoutEffect(() => {
-    document.title = "New Tab";
+    document.title = 'New Tab';
   }, []);
 
   return (

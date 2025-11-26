@@ -1,6 +1,11 @@
-import { ReactElement } from "react";
+import { Icon } from '@components/icon/icon';
+import { getFaviconUrl } from '@components/quick-links/helpers';
+import { useDraggable } from '@dnd-kit/core';
+import { IQuickLink } from '@shared/interfaces';
+import { Avatar, ContextMenu } from 'radix-ui';
+import { ReactElement } from 'react';
+import { BsFillPencilFill, BsTrash3 } from 'react-icons/bs';
 
-import { getFaviconUrl } from "@components/quick-links/helpers";
 import {
   ContextItem,
   ContextMenuContainer,
@@ -9,12 +14,7 @@ import {
   LinkImage,
   LinkItemStyled,
   LinkLabel,
-} from "./styles";
-import { Avatar, ContextMenu } from "radix-ui";
-import { BsFillPencilFill, BsTrash3 } from "react-icons/bs";
-import { IQuickLink } from "@shared/interfaces";
-import { useDraggable } from "@dnd-kit/core";
-import { Icon } from "@components/icon/icon";
+} from './styles';
 
 interface IProps {
   link: IQuickLink;
@@ -36,8 +36,8 @@ export const LinkItem = ({
   });
   const style = transform
     ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
-      }
+      transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+    }
     : undefined;
 
   return (

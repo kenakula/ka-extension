@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Dialog, RadioGroup } from "radix-ui";
+import { Dialog, RadioGroup } from 'radix-ui';
+import styled from 'styled-components';
 
 export const EditDialog = styled(Dialog.Content)`
   position: absolute;

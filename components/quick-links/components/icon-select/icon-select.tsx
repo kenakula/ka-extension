@@ -1,19 +1,20 @@
-import { ReactElement, useEffect, useState, useTransition } from "react";
-import { useFormikContext } from "formik";
-import * as icons from "react-icons/fa6";
-import { RadioGroup, VisuallyHidden } from "radix-ui";
+import { GenericButton } from '@components/button';
+import { Dialog, DialogTitle } from '@components/dialog';
+import { Icon } from '@components/icon/icon';
+import { useDebounce } from '@shared/hooks';
+import { IQuickLink } from '@shared/interfaces';
+import { useFormikContext } from 'formik';
+import { RadioGroup, VisuallyHidden } from 'radix-ui';
+import { ReactElement, useEffect, useState, useTransition } from 'react';
+import { IconType } from 'react-icons';
+import * as icons from 'react-icons/fa6';
+
 import {
   IconDialogContent,
   IconDialogHeader,
   RadioIndicator,
   RadioItem,
-} from "./styles";
-import { IQuickLink } from "@shared/interfaces";
-import { IconType } from "react-icons";
-import { useDebounce } from "@shared/hooks";
-import { Dialog, DialogTitle } from "@components/dialog";
-import { Icon } from "@components/icon/icon";
-import { GenericButton } from "@components/button";
+} from './styles';
 
 const iconsList = Object.entries(icons);
 
@@ -25,17 +26,17 @@ interface IProps {
 export const IconSelect = ({ isOpen, onOpenChange }: IProps): ReactElement => {
   const [filteredIcons, setFilteredIcons] =
     useState<[string, IconType][]>(iconsList);
-  const [searchString, setSearchString] = useState<string>("");
-  const [iconColor, setIconColor] = useState("aliceblue");
+  const [searchString, setSearchString] = useState<string>('');
+  const [iconColor, setIconColor] = useState('aliceblue');
   const formik = useFormikContext<IQuickLink>();
 
   const [isTransitioning, startTransition] = useTransition();
 
   const debouncedSearchString = useDebounce<string>(searchString, 300);
 
-  const handleColorValueChange = async (value: string) => {
+  const handleColorValueChange = async (value: string): Promise<void> => {
     setIconColor(value);
-    await formik.setFieldValue("iconColor", value);
+    await formik.setFieldValue('iconColor', value);
   };
 
   useEffect(() => {
@@ -74,13 +75,13 @@ export const IconSelect = ({ isOpen, onOpenChange }: IProps): ReactElement => {
             <span>Choose color</span>
             <RadioGroup.Root onValueChange={handleColorValueChange}>
               <RadioItem value="aliceblue">
-                <RadioIndicator />
+                <RadioIndicator/>
               </RadioItem>
               <RadioItem value="red">
-                <RadioIndicator />
+                <RadioIndicator/>
               </RadioItem>
               <RadioItem value="blue">
-                <RadioIndicator />
+                <RadioIndicator/>
               </RadioItem>
             </RadioGroup.Root>
           </div>
@@ -95,11 +96,11 @@ export const IconSelect = ({ isOpen, onOpenChange }: IProps): ReactElement => {
                   type="button"
                   style={{ color: iconColor }}
                   onClick={async () => {
-                    await formik.setFieldValue("iconName", name);
+                    await formik.setFieldValue('iconName', name);
                     onOpenChange(false);
                   }}
                 >
-                  <Icon.FaIcon iconName={name} />
+                  <Icon.FaIcon iconName={name}/>
                   <span>{name.slice(2)}</span>
                 </GenericButton>
               </li>

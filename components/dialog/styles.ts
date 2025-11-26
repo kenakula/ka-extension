@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Dialog } from "radix-ui";
+import { Dialog } from 'radix-ui';
+import styled from 'styled-components';
 
 export const DialogOverlay = styled(Dialog.Overlay)`
   background-color: rgba(42, 52, 64, 0.7);
