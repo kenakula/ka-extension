@@ -1,6 +1,6 @@
-import { GenericButton } from '@components/button';
 import { Dialog, DialogTitle } from '@components/dialog';
 import { Icon } from '@components/icon';
+import { Button } from '@radix-ui/themes';
 import { useDebounce } from '@shared/hooks';
 import { IQuickLink } from '@shared/interfaces';
 import { useFormikContext } from 'formik';
@@ -92,7 +92,7 @@ export const IconSelect = ({ isOpen, onOpenChange }: IProps): ReactElement => {
           <ul>
             {filteredIcons.map(([name]) => (
               <li key={name}>
-                <GenericButton
+                <Button
                   type="button"
                   style={{ color: iconColor }}
                   onClick={async () => {
@@ -102,7 +102,7 @@ export const IconSelect = ({ isOpen, onOpenChange }: IProps): ReactElement => {
                 >
                   <Icon.FaIcon iconName={name}/>
                   <span>{name.slice(2)}</span>
-                </GenericButton>
+                </Button>
               </li>
             ))}
           </ul>

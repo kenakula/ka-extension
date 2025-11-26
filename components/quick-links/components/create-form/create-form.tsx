@@ -1,5 +1,5 @@
-import { Button } from '@components/button';
 import { Icon } from '@components/icon';
+import { Button } from '@radix-ui/themes';
 import { IQuickLink } from '@shared/interfaces';
 import { Field, Formik } from 'formik';
 import { ReactElement, useState } from 'react';
@@ -63,7 +63,6 @@ export const CreateForm = ({
             <label htmlFor="#">select custom icon</label>
             <Button
               type="button"
-              variant="secondary"
               onClick={handleOpenIconModal}
             >
               {values.iconName ? (
@@ -83,7 +82,7 @@ export const CreateForm = ({
             <Field name="useCustomIcon" id="useCustomIcon" type="checkbox"/>
           </FieldContainer>
 
-          <Button variant="primary" type="submit">
+          <Button type="submit">
             Add
           </Button>
         </FormStyled>

@@ -1,10 +1,10 @@
-import { GenericButton } from '@components/button';
 import {
   Dialog,
   DialogDescription,
   DialogSection,
   DialogTitle,
 } from '@components/dialog';
+import { Button } from '@radix-ui/themes';
 import { TQuickLinksPanel } from '@shared/interfaces';
 import { VisuallyHidden } from 'radix-ui';
 import { ReactElement } from 'react';
@@ -29,7 +29,7 @@ interface IProps {
 
 const TriggerButton = (): ReactElement => (
   <SettingsButton>
-    <FiSettings size={36} />
+    <FiSettings size={36}/>
   </SettingsButton>
 );
 
@@ -49,10 +49,10 @@ export const SettingsDialog = ({
         <DialogSection>
           <SettingsSectionHeader>
             <SettingsSectionTitle>Rows</SettingsSectionTitle>
-            <GenericButton onClick={() => addRow()}>
-              <SlPlus size={18} />
+            <Button onClick={() => addRow()}>
+              <SlPlus size={18}/>
               <span>Add row</span>
-            </GenericButton>
+            </Button>
           </SettingsSectionHeader>
           <SettingsSectionList>
             {Object.entries(linksPanel).map(([rowName, row]) => (
