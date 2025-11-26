@@ -1,10 +1,10 @@
 import { Button } from '@components/button';
-import { Icon } from '@components/icon/icon';
+import { Icon } from '@components/icon';
 import { IQuickLink } from '@shared/interfaces';
 import { Field, Formik } from 'formik';
 import { ReactElement, useState } from 'react';
 
-import { IconSelect } from '../icon-select/icon-select';
+import { IconSelect } from '../icon-select';
 import { DEFAULT_VALUES } from './constants';
 import { FieldContainer, FormStyled } from './styles';
 
@@ -51,12 +51,12 @@ export const CreateForm = ({
         <FormStyled>
           <FieldContainer>
             <label htmlFor="url">url</label>
-            <Field id="url" name="url" />
+            <Field id="url" name="url"/>
           </FieldContainer>
 
           <FieldContainer>
             <label htmlFor="label">label</label>
-            <Field id="label" name="label" />
+            <Field id="label" name="label"/>
           </FieldContainer>
 
           <FieldContainer>
@@ -67,7 +67,7 @@ export const CreateForm = ({
               onClick={handleOpenIconModal}
             >
               {values.iconName ? (
-                <Icon.FaIcon iconName={values.iconName} />
+                <Icon.FaIcon iconName={values.iconName}/>
               ) : (
                 <span>choose icon</span>
               )}
@@ -80,7 +80,7 @@ export const CreateForm = ({
 
           <FieldContainer>
             <label htmlFor="useCustomIcon">use custom icon</label>
-            <Field name="useCustomIcon" id="useCustomIcon" type="checkbox" />
+            <Field name="useCustomIcon" id="useCustomIcon" type="checkbox"/>
           </FieldContainer>
 
           <Button variant="primary" type="submit">

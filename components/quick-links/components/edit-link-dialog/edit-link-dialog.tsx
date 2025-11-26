@@ -3,7 +3,7 @@ import { IQuickLink } from '@shared/interfaces';
 import { VisuallyHidden } from 'radix-ui';
 import { ReactElement } from 'react';
 
-import { CreateForm } from '../create-form/create-form';
+import { CreateForm } from '../create-form';
 import { EditDialog } from './styles';
 
 interface IProps {
@@ -28,7 +28,7 @@ export const EditLinkDialog = ({
             Edit link by defining url and label
           </DialogDescription>
         </VisuallyHidden.Root>
-        <CreateForm handleSubmit={handleSubmit} defaultValues={defaultValues} />
+        <CreateForm handleSubmit={handleSubmit} defaultValues={defaultValues}/>
       </EditDialog>
     </Dialog>
   );

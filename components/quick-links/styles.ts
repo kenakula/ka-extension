@@ -8,12 +8,6 @@ export const LinksSet = styled.div`
   max-width: 70%;
 `;
 
-export const LinksRowControls = styled.div`
-  display: flex;
-  align-items: center;
-  column-gap: 10px;
-`;
-
 export const GenericButton = styled.button`
   padding: 0;
   display: flex;
@@ -33,13 +27,6 @@ export const GenericButton = styled.button`
   &:active {
     opacity: 0.5;
   }
-`;
-
-export const RemoveRowButton = styled(GenericButton)`
-  display: flex;
-  align-items: center;
-  column-gap: 5px;
-  color: #fd5d5d;
 `;
 
 interface ILinksListStyles {

@@ -1,6 +1,6 @@
 import { GenericButton } from '@components/button';
 import { Dialog, DialogTitle } from '@components/dialog';
-import { Icon } from '@components/icon/icon';
+import { Icon } from '@components/icon';
 import { useDebounce } from '@shared/hooks';
 import { IQuickLink } from '@shared/interfaces';
 import { useFormikContext } from 'formik';

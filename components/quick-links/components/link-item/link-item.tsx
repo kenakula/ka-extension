@@ -1,5 +1,4 @@
-import { Icon } from '@components/icon/icon';
-import { getFaviconUrl } from '@components/quick-links/helpers';
+import { Icon } from '@components/icon';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { IQuickLink } from '@shared/interfaces';
@@ -7,6 +6,7 @@ import { Avatar, ContextMenu } from 'radix-ui';
 import { ReactElement } from 'react';
 import { BsFillPencilFill, BsTrash3 } from 'react-icons/bs';
 
+import { getFaviconUrl } from '../../helpers';
 import {
   ContextItem,
   ContextMenuContainer,

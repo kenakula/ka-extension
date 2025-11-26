@@ -10,8 +10,8 @@ import { horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortabl
 import { IQuickLink } from '@shared/interfaces';
 import { ReactElement } from 'react';
 
-import { AddLinkButton } from '../add-link-button/add-link-button';
-import { LinkItem } from '../link-item/link-item';
+import { AddLinkButton } from '../add-link-button';
+import { LinkItem } from '../link-item';
 import { LinksList } from './styles';
 
 interface IProps {

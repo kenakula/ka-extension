@@ -1,9 +1,9 @@
 import { IQuickLink, TQuickLinksPanel } from '@shared/interfaces';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 
-import { EditLinkDialog } from './components/edit-link-dialog/edit-link-dialog';
+import { EditLinkDialog } from './components/edit-link-dialog';
 import { LinksRow } from './components/links-row';
-import { SettingsDialog } from './components/settings-dialog/settings-dialog';
+import { SettingsDialog } from './components/settings-dialog';
 import { LinksSet } from './styles';
 
 const STORAGE_LINKS_KEY = 'kp_quick_links';
