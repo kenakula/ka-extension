@@ -1,4 +1,3 @@
-import { GenericButton } from '@components/quick-links/styles';
 import styled from 'styled-components';
 
 export const SettingsSectionHeader = styled.div`
@@ -34,12 +33,5 @@ export const LinksRowControls = styled.div`
   display: flex;
   align-items: center;
   column-gap: 10px;
-`;
-
-export const RemoveRowButton = styled(GenericButton)`
-  display: flex;
-  align-items: center;
-  column-gap: 5px;
-  color: #fd5d5d;
 `;
 

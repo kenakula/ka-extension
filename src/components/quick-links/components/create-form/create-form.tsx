@@ -11,7 +11,7 @@ interface IProps {
   handleSubmit: (values: IQuickLink, rowName?: string) => void;
   rowName?: string;
   defaultValues?: IQuickLink;
-  handleClosePopover: () => void;
+  handleClosePopover?: () => void;
 }
 
 export const CreateForm = ({
@@ -35,7 +35,7 @@ export const CreateForm = ({
     }
 
     handleSubmit(values, rowName);
-    handleClosePopover();
+    handleClosePopover?.();
   };
 
   const handleOpenIconModal = (): void => {

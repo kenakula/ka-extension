@@ -3,9 +3,9 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
+import { GlobalStyles, NewTabContainer } from '@app/styles';
 import { Clock } from '@components/clock';
 import { QuickLinks } from '@components/quick-links';
-import { GlobalStyles, NewTabContainer } from '@shared/styles';
 import { ReactElement, useLayoutEffect } from 'react';
 
 const NewTab = (): ReactElement => {
