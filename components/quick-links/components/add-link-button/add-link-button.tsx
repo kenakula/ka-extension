@@ -40,7 +40,7 @@ export const AddLinkButton = ({ rowName, addLink }: IProps): ReactElement => {
         }}
       >
         <PopoverContent>
-          <CreateForm rowName={rowName} handleSubmit={addLink}/>
+          <CreateForm rowName={rowName} handleSubmit={addLink} handleClosePopover={handleClose}/>
         </PopoverContent>
       </Popover>
     </>

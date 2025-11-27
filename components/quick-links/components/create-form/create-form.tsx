@@ -11,11 +11,13 @@ interface IProps {
   handleSubmit: (values: IQuickLink, rowName?: string) => void;
   rowName?: string;
   defaultValues?: IQuickLink;
+  handleClosePopover: () => void;
 }
 
 export const CreateForm = ({
   handleSubmit,
   rowName,
+  handleClosePopover,
   defaultValues = DEFAULT_VALUES,
 }: IProps): ReactElement => {
   const [isIconModalOpen, setIsIconModalOpen] = useState(false);
@@ -33,6 +35,7 @@ export const CreateForm = ({
     }
 
     handleSubmit(values, rowName);
+    handleClosePopover();
   };
 
   const handleOpenIconModal = (): void => {
