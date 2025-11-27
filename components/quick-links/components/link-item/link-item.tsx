@@ -1,18 +1,19 @@
 import { Icon } from '@components/icon';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import { IQuickLink } from '@shared/interfaces';
-import { Avatar, ContextMenu } from 'radix-ui';
-import { ReactElement } from 'react';
-import { BsFillPencilFill, BsTrash3 } from 'react-icons/bs';
+import { MouseEventHandler, ReactElement, useState } from 'react';
 
 import { getFaviconUrl } from '../../helpers';
 import {
-  ContextItem,
-  ContextMenuContainer,
   IconWrapper,
   LinkButton,
-  LinkImage,
   LinkItemStyled,
   LinkLabel,
 } from './styles';
@@ -30,7 +31,8 @@ export const LinkItem = ({
   handleEditLink,
   setName,
 }: IProps): ReactElement => {
-  const { url, label, iconName, useCustomIcon, iconColor } = link;
+  const { url, label, iconName, useCustomIcon } = link;
+  const [contextMenuAnchor, setContextMenuAnchor] = useState<Element | null>(null);
 
   const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: url });
 
@@ -39,44 +41,70 @@ export const LinkItem = ({
     transition,
   };
 
+  const handleCloseContextMenu = (): void => {
+    setContextMenuAnchor(null);
+  };
+
+  const handleEditClick = (): void => {
+    handleEditLink(setName, link);
+    handleCloseContextMenu();
+  };
+
+  const handleDeleteClick = (): void => {
+    handleDeleteLink(setName, link.url);
+    handleCloseContextMenu();
+  };
+
   const handleLinkButtonClick = (): void => {
     window.location.href = link.url;
   };
 
+  const handleOpenContextMenu: MouseEventHandler<HTMLLIElement> = (event): void => {
+    event.preventDefault();
+    setContextMenuAnchor(event.currentTarget);
+  };
+
   return (
-    <LinkItemStyled ref={setNodeRef} style={style} {...attributes} {...listeners}>
-      <ContextMenu.Root>
-        <ContextMenu.Trigger>
-          <LinkButton onClick={handleLinkButtonClick}>
-            {useCustomIcon ? (
-              <IconWrapper style={{ color: iconColor }}>
-                <Icon.FaIcon iconName={iconName}/>
-              </IconWrapper>
-            ) : (
-              <LinkImage>
-                <Avatar.Image
-                  width={32}
-                  height={32}
-                  src={getFaviconUrl(url, 128)}
-                />
-              </LinkImage>
-            )}
-            {label ? <LinkLabel>{label}</LinkLabel> : null}
-          </LinkButton>
-        </ContextMenu.Trigger>
-        <ContextMenu.Portal>
-          <ContextMenuContainer>
-            <ContextItem onSelect={() => handleDeleteLink(setName, url)}>
-              <BsTrash3/>
-              <span>Delete</span>
-            </ContextItem>
-            <ContextItem onSelect={() => handleEditLink(setName, link)}>
-              <BsFillPencilFill/>
-              <span>Edit</span>
-            </ContextItem>
-          </ContextMenuContainer>
-        </ContextMenu.Portal>
-      </ContextMenu.Root>
+    <LinkItemStyled
+      ref={setNodeRef}
+      style={style} {...attributes} {...listeners}
+      onContextMenu={handleOpenContextMenu}
+    >
+      <LinkButton onClick={handleLinkButtonClick}>
+        <IconWrapper>
+          {useCustomIcon ? (
+            <Icon.FaIcon iconName={iconName}/>
+          ) : (
+            <img
+              width={32}
+              height={32}
+              src={getFaviconUrl(url, 128)}
+              alt=""
+            />
+          )}
+        </IconWrapper>
+
+        {label ? <LinkLabel>{label}</LinkLabel> : null}
+      </LinkButton>
+      <Menu
+        id="basic-menu"
+        anchorEl={contextMenuAnchor}
+        open={Boolean(contextMenuAnchor)}
+        onClose={handleCloseContextMenu}
+      >
+        <MenuItem onClick={handleEditClick}>
+          <ListItemIcon>
+            <EditIcon/>
+          </ListItemIcon>
+          <ListItemText>Edit</ListItemText>
+        </MenuItem>
+        <MenuItem onClick={handleDeleteClick}>
+          <ListItemIcon>
+            <DeleteIcon/>
+          </ListItemIcon>
+          <ListItemText color="error">Delete</ListItemText>
+        </MenuItem>
+      </Menu>
     </LinkItemStyled>
   );
 };

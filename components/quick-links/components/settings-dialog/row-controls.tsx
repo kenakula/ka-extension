@@ -1,4 +1,3 @@
-import { Button } from '@radix-ui/themes';
 import { ReactElement } from 'react';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { SlMinus } from 'react-icons/sl';
@@ -24,10 +23,10 @@ export const RowControls = ({
         <SlMinus size={18}/>
         <span>Remove</span>
       </RemoveRowButton>
-      <Button onClick={() => toggleRowVisibility(rowName)}>
+      <button onClick={() => toggleRowVisibility(rowName)}>
         {isHidden ? <FiEye size={18}/> : <FiEyeOff size={18}/>}
         <span>{isHidden ? 'Show' : 'Hide'}</span>
-      </Button>
+      </button>
     </LinksRowControls>
   );
 };

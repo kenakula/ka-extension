@@ -1,4 +1,3 @@
-import { Button } from '@radix-ui/themes';
 import type { IServiceItem } from '@shared/interfaces';
 import type { ReactElement } from 'react';
 
@@ -36,12 +35,12 @@ export const ServiceItem = ({
     <ServicesItem>
       <ServiceName>{name}</ServiceName>
       <ServiceControls>
-        <Button disabled={!isMoviePage} onClick={handleOpen}>
+        <button type="button" disabled={!isMoviePage} onClick={handleOpen}>
           Open
-        </Button>
-        <Button onClick={handleInjectStyles}>
+        </button>
+        <button type="button" onClick={handleInjectStyles}>
           Inject
-        </Button>
+        </button>
       </ServiceControls>
     </ServicesItem>
   );

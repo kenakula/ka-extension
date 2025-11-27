@@ -1,5 +1,4 @@
 import { Icon } from '@components/icon';
-import { Button } from '@radix-ui/themes';
 import { IQuickLink } from '@shared/interfaces';
 import { Field, Formik } from 'formik';
 import { ReactElement, useState } from 'react';
@@ -21,10 +20,8 @@ export const CreateForm = ({
 }: IProps): ReactElement => {
   const [isIconModalOpen, setIsIconModalOpen] = useState(false);
 
-  const handleCloseEditModal = (state: boolean): void => {
-    if (!state) {
-      setIsIconModalOpen(false);
-    }
+  const handleCloseEditModal = (): void => {
+    setIsIconModalOpen(false);
   };
 
   const handleFormSubmit = (values: IQuickLink): void => {
@@ -61,7 +58,7 @@ export const CreateForm = ({
 
           <FieldContainer>
             <label htmlFor="#">select custom icon</label>
-            <Button
+            <button
               type="button"
               onClick={handleOpenIconModal}
             >
@@ -70,10 +67,10 @@ export const CreateForm = ({
               ) : (
                 <span>choose icon</span>
               )}
-            </Button>
+            </button>
             <IconSelect
               isOpen={isIconModalOpen}
-              onOpenChange={handleCloseEditModal}
+              handleClose={handleCloseEditModal}
             />
           </FieldContainer>
 
@@ -82,9 +79,9 @@ export const CreateForm = ({
             <Field name="useCustomIcon" id="useCustomIcon" type="checkbox"/>
           </FieldContainer>
 
-          <Button type="submit">
+          <button type="submit">
             Add
-          </Button>
+          </button>
         </FormStyled>
       )}
     </Formik>

@@ -1,7 +1,6 @@
-import { Popover } from 'radix-ui';
 import styled from 'styled-components';
 
-export const AddPopover = styled(Popover.Content)`
+export const PopoverContent = styled.div`
   background-color: rgba(240, 248, 255, 0.23);
   padding: 10px;
   border-radius: 8px;
@@ -12,7 +11,7 @@ export const LinkItemStyled = styled.li`
   min-width: 42px;
 `;
 
-export const StyledAddLinkButton = styled(Popover.Trigger)`
+export const StyledAddLinkButton = styled.button`
   padding: 0;
   display: flex;
   align-items: center;

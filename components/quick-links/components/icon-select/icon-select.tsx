@@ -1,29 +1,29 @@
-import { Dialog, DialogTitle } from '@components/dialog';
 import { Icon } from '@components/icon';
-import { Button } from '@radix-ui/themes';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
 import { useDebounce } from '@shared/hooks';
 import { IQuickLink } from '@shared/interfaces';
 import { useFormikContext } from 'formik';
-import { RadioGroup, VisuallyHidden } from 'radix-ui';
-import { ReactElement, useEffect, useState, useTransition } from 'react';
+import { ChangeEvent, ReactElement, useEffect, useState, useTransition } from 'react';
 import { IconType } from 'react-icons';
 import * as icons from 'react-icons/fa6';
 
 import {
-  IconDialogContent,
   IconDialogHeader,
-  RadioIndicator,
-  RadioItem,
 } from './styles';
 
 const iconsList = Object.entries(icons);
 
 interface IProps {
   isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
+  handleClose: () => void;
 }
 
-export const IconSelect = ({ isOpen, onOpenChange }: IProps): ReactElement => {
+export const IconSelect = ({ isOpen, handleClose }: IProps): ReactElement => {
   const [filteredIcons, setFilteredIcons] =
     useState<[string, IconType][]>(iconsList);
   const [searchString, setSearchString] = useState<string>('');
@@ -34,7 +34,8 @@ export const IconSelect = ({ isOpen, onOpenChange }: IProps): ReactElement => {
 
   const debouncedSearchString = useDebounce<string>(searchString, 300);
 
-  const handleColorValueChange = async (value: string): Promise<void> => {
+  const handleChange = async (event: ChangeEvent<HTMLInputElement>): Promise<void> => {
+    const value = event.target.value;
     setIconColor(value);
     await formik.setFieldValue('iconColor', value);
   };
@@ -55,12 +56,9 @@ export const IconSelect = ({ isOpen, onOpenChange }: IProps): ReactElement => {
   }, [debouncedSearchString]);
 
   return (
-    <Dialog isOpen={isOpen} onOpenChange={onOpenChange}>
-      <IconDialogContent>
+    <Dialog open={isOpen} onClose={handleClose}>
+      <DialogContent>
         <IconDialogHeader>
-          <VisuallyHidden.Root>
-            <DialogTitle>Select icon</DialogTitle>
-          </VisuallyHidden.Root>
           <label>
             search
             <input
@@ -73,17 +71,13 @@ export const IconSelect = ({ isOpen, onOpenChange }: IProps): ReactElement => {
           </label>
           <div>
             <span>Choose color</span>
-            <RadioGroup.Root onValueChange={handleColorValueChange}>
-              <RadioItem value="aliceblue">
-                <RadioIndicator/>
-              </RadioItem>
-              <RadioItem value="red">
-                <RadioIndicator/>
-              </RadioItem>
-              <RadioItem value="blue">
-                <RadioIndicator/>
-              </RadioItem>
-            </RadioGroup.Root>
+            <FormControl>
+              <RadioGroup row name="icon-color" value={iconColor} onChange={handleChange}>
+                <FormControlLabel control={<Radio/>} label="aliceblue" value="aliceblue"/>
+                <FormControlLabel control={<Radio/>} label="red" value="red"/>
+                <FormControlLabel control={<Radio/>} label="blue" value="blue"/>
+              </RadioGroup>
+            </FormControl>
           </div>
         </IconDialogHeader>
         {isTransitioning ? (
@@ -92,22 +86,22 @@ export const IconSelect = ({ isOpen, onOpenChange }: IProps): ReactElement => {
           <ul>
             {filteredIcons.map(([name]) => (
               <li key={name}>
-                <Button
+                <button
                   type="button"
                   style={{ color: iconColor }}
                   onClick={async () => {
                     await formik.setFieldValue('iconName', name);
-                    onOpenChange(false);
+                    handleClose();
                   }}
                 >
                   <Icon.FaIcon iconName={name}/>
                   <span>{name.slice(2)}</span>
-                </Button>
+                </button>
               </li>
             ))}
           </ul>
         )}
-      </IconDialogContent>
+      </DialogContent>
     </Dialog>
   );
 };

@@ -1,10 +1,11 @@
 import { IQuickLink, TQuickLinksPanel } from '@shared/interfaces';
 import { ReactElement, useEffect, useRef, useState } from 'react';
+import { FiSettings } from 'react-icons/fi';
 
 import { EditLinkDialog } from './components/edit-link-dialog';
 import { LinksRow } from './components/links-row';
 import { SettingsDialog } from './components/settings-dialog';
-import { LinksSet } from './styles';
+import { LinksSet, SettingsButton } from './styles';
 
 const STORAGE_LINKS_KEY = 'kp_quick_links';
 
@@ -52,6 +53,16 @@ export const QuickLinks = (): ReactElement => {
   const [editingLink, setEditingLink] = useState<IQuickLink | null>(null);
   const [editingRow, setEditingRow] = useState<string | null>(null);
 
+  const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
+
+  const handleCloseSettings = (): void => {
+    setIsSettingsOpen(false);
+  };
+
+  const handleOpenSettings = (): void => {
+    setIsSettingsOpen(true);
+  };
+
   const handleSort = (setName: string, from: number, to: number): void => {
     const links = linksPanel[setName].links.slice();
     const isRtl = to > from;
@@ -87,11 +98,9 @@ export const QuickLinks = (): ReactElement => {
     });
   };
 
-  const handleCloseEditModal = (state: boolean): void => {
-    if (!state) {
-      setEditingLink(null);
-      setEditingRow(null);
-    }
+  const handleCloseEditModal = (): void => {
+    setEditingLink(null);
+    setEditingRow(null);
   };
 
   const handleDeleteLink = (setName: string, url: string): void => {
@@ -173,17 +182,22 @@ export const QuickLinks = (): ReactElement => {
           /> : null,
         )}
       </LinksSet>
+      <SettingsButton onClick={handleOpenSettings}>
+        <FiSettings size={36}/>
+      </SettingsButton>
       <EditLinkDialog
         isOpen={!!editingLink}
-        onOpenChange={handleCloseEditModal}
+        handleClose={handleCloseEditModal}
         handleSubmit={handleEditLink}
         defaultValues={editingLink}
       />
       <SettingsDialog
+        isOpen={isSettingsOpen}
         toggleRowVisibility={toggleRowVisibility}
         linksPanel={linksPanel}
         addRow={handleAddRow}
         removeRow={handleRemoveRow}
+        handleClose={handleCloseSettings}
       />
     </>
   );

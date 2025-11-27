@@ -1,35 +1,30 @@
-import { Dialog, DialogDescription, DialogTitle } from '@components/dialog';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import { IQuickLink } from '@shared/interfaces';
-import { VisuallyHidden } from 'radix-ui';
 import { ReactElement } from 'react';
 
 import { CreateForm } from '../create-form';
-import { EditDialog } from './styles';
 
 interface IProps {
   isOpen: boolean;
-  onOpenChange: (open: boolean) => void;
+  handleClose: () => void;
   handleSubmit: (values: IQuickLink, rowName?: string) => void;
   defaultValues?: IQuickLink;
 }
 
 export const EditLinkDialog = ({
   isOpen,
-  onOpenChange,
+  handleClose,
   handleSubmit,
   defaultValues,
 }: IProps): ReactElement => {
   return (
-    <Dialog onOpenChange={onOpenChange} isOpen={isOpen}>
-      <EditDialog>
-        <DialogTitle>Edit link</DialogTitle>
-        <VisuallyHidden.Root>
-          <DialogDescription>
-            Edit link by defining url and label
-          </DialogDescription>
-        </VisuallyHidden.Root>
+    <Dialog onClose={handleClose} open={isOpen}>
+      <DialogTitle>Edit link</DialogTitle>
+      <DialogContent>
         <CreateForm handleSubmit={handleSubmit} defaultValues={defaultValues}/>
-      </EditDialog>
+      </DialogContent>
     </Dialog>
   );
 };
