@@ -1,4 +1,6 @@
+import { DEFAULT_PANEL } from '@shared/constants';
 import { IQuickLink, TQuickLinksPanel } from '@shared/interfaces';
+import { getId } from '@shared/utils';
 import { ReactElement, useEffect, useRef, useState } from 'react';
 import { FiSettings } from 'react-icons/fi';
 
@@ -9,50 +11,12 @@ import { LinksSet, SettingsButton } from './styles';
 
 const STORAGE_LINKS_KEY = 'kp_quick_links';
 
-const DEFAULT_SET: TQuickLinksPanel = {
-  defaultSet: {
-    links: [
-      {
-        url: 'https://yandex.ru/maps',
-        label: '',
-        iconLink: '',
-        iconName: '',
-        useCustomIcon: false,
-      },
-      {
-        url: 'https://kinopoisk.ru',
-        label: '',
-        iconLink: '',
-        iconName: '',
-        useCustomIcon: false,
-      },
-      {
-        url: 'https://youtube.com',
-        label: '',
-        iconLink: '',
-        iconName: '',
-        useCustomIcon: false,
-      },
-      {
-        url: 'https://yandex.ru/pogoda/ru/saint-petersburg',
-        label: '',
-        iconLink: '',
-        iconName: '',
-        useCustomIcon: false,
-      },
-    ],
-    isHidden: false,
-  },
-};
-
 export const QuickLinks = (): ReactElement => {
   const areLinksSet = useRef<boolean>(false);
 
-  const [linksPanel, setLinksPanel] = useState<TQuickLinksPanel>(DEFAULT_SET);
-
+  const [linksPanel, setLinksPanel] = useState<TQuickLinksPanel>(DEFAULT_PANEL);
   const [editingLink, setEditingLink] = useState<IQuickLink | null>(null);
   const [editingRow, setEditingRow] = useState<string | null>(null);
-
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
 
   const handleRenameRow = (rowName: string, newName: string): void => {
@@ -155,7 +119,7 @@ export const QuickLinks = (): ReactElement => {
 
   const handleAddRow = (rowName?: string): void => {
     const name = rowName ?? `newSet[${Date.now()}]`;
-    setLinksPanel({ ...linksPanel, [name]: { links: [], isHidden: false } });
+    setLinksPanel({ ...linksPanel, [name]: { links: [], isHidden: false, id: getId() } });
   };
 
   const handleRemoveRow = (rowName: string): void => {
@@ -166,7 +130,7 @@ export const QuickLinks = (): ReactElement => {
 
   useEffect(() => {
     const storedSet =
-      localStorage.getItem(STORAGE_LINKS_KEY) ?? JSON.stringify(DEFAULT_SET);
+      localStorage.getItem(STORAGE_LINKS_KEY) ?? JSON.stringify(DEFAULT_PANEL);
     setLinksPanel(JSON.parse(storedSet));
     areLinksSet.current = true;
   }, []);

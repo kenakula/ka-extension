@@ -7,7 +7,9 @@ export interface IServiceItem {
 }
 
 export interface IQuickLink {
+  id: string;
   url: string;
+  setName: string;
   label?: string;
   iconLink?: string;
   iconName?: string;
@@ -15,7 +17,14 @@ export interface IQuickLink {
   useCustomIcon?: boolean;
 }
 
+export interface IQuickLinksSet {
+  id: string;
+  name: string;
+  isHidden: boolean;
+  links: IQuickLink[];
+}
+
 export type TQuickLinksPanel = Record<
   string,
-  { links: IQuickLink[]; isHidden: boolean }
+  { links: IQuickLink[]; isHidden: boolean; id: string }
 >;
