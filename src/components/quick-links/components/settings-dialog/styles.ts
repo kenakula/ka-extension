@@ -1,37 +1,27 @@
+import Box from '@mui/material/Box';
+import { styled as muiStyled } from '@mui/material/styles';
 import styled from 'styled-components';
 
-export const SettingsSectionHeader = styled.div`
+export const SettingsContainer = styled.div`
+  padding: 20px 10px;
+`;
+
+export const SettingsSectionHeader = muiStyled(Box)`
   display: flex;
+  margin-bottom: 10px;
   justify-content: space-between;
+  align-items: center;
 `;
 
-export const SettingsSectionTitle = styled.h3`
-  margin: 0 0 20px;
-`;
-
-export const SettingsSectionList = styled.ul`
-  margin: 0;
-  padding: 0;
+export const StyledRow = muiStyled(Box)`
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  list-style: none;
-
-  li {
-    display: flex;
-    column-gap: 20px;
-    width: 100%;
-
-    & > span {
-      margin-right: auto;
-      font-size: 12px;
-    }
-  }
+  align-items: center;
+  column-gap: 20px;
+  width: 100%;
 `;
 
 export const LinksRowControls = styled.div`
   display: flex;
   align-items: center;
-  column-gap: 10px;
 `;
 

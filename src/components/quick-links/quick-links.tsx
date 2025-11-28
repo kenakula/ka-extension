@@ -55,6 +55,16 @@ export const QuickLinks = (): ReactElement => {
 
   const [isSettingsOpen, setIsSettingsOpen] = useState<boolean>(false);
 
+  const handleRenameRow = (rowName: string, newName: string): void => {
+    setLinksPanel((prev) => {
+      const prevCopy = { ...prev };
+      const rowCopy = prev[rowName];
+      delete prevCopy[rowName];
+
+      return { ...prevCopy, [newName]: rowCopy };
+    });
+  };
+
   const handleCloseSettings = (): void => {
     setIsSettingsOpen(false);
   };
@@ -193,6 +203,7 @@ export const QuickLinks = (): ReactElement => {
       />
       <SettingsDialog
         isOpen={isSettingsOpen}
+        handleRenameRow={handleRenameRow}
         toggleRowVisibility={toggleRowVisibility}
         linksPanel={linksPanel}
         addRow={handleAddRow}

@@ -9,7 +9,7 @@ import { Clock } from '@components/clock';
 import { QuickLinks } from '@components/quick-links';
 import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ReactElement, useLayoutEffect } from 'react';
+import React, { ReactElement, useLayoutEffect } from 'react';
 
 const NewTab = (): ReactElement => {
   useLayoutEffect(() => {
