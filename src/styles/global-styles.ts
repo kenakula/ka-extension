@@ -16,7 +16,6 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     min-height: 100dvh;
     font-size: 16px;
-    font-family: Calibri sans-serif;
     background: linear-gradient(180deg, #383b43 0%, #23262d 70%);
     color: aliceblue;
   }

@@ -88,7 +88,7 @@ export const IconSelect = ({ isOpen, handleClose }: IProps): ReactElement => {
               <li key={name}>
                 <button
                   type="button"
-                  style={{ color: iconColor }}
+                  style={{ color: iconColor, background: 'black' }}
                   onClick={async () => {
                     await formik.setFieldValue('iconName', name);
                     handleClose();

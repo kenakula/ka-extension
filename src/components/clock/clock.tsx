@@ -26,5 +26,5 @@ export const Clock = (): ReactElement => {
     };
   }, []);
 
-  return <TimeLabel>{time}</TimeLabel>;
+  return <TimeLabel variant="h1">{time}</TimeLabel>;
 };
