@@ -91,21 +91,20 @@ export const LinkForm = ({
                 choose icon
               </Button>
             )}
+            <FormControlLabel
+              label="use it"
+              control={<Checkbox/>}
+              checked={values.useCustomIcon}
+              name="useCustomIcon"
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
 
             <IconSelect
               isOpen={isIconModalOpen}
               handleClose={handleCloseEditModal}
             />
           </ChooseIconContainer>
-
-          <FormControlLabel
-            label="useCustomIcon"
-            control={<Checkbox/>}
-            value={values.useCustomIcon}
-            name="useCustomIcon"
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
 
           <Button type="submit" variant="contained">
             {mode === 'add' ? 'Add' : 'Edit'}

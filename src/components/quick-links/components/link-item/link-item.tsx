@@ -8,7 +8,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { IQuickLink } from '@shared/interfaces';
-import { MouseEventHandler, ReactElement, useState } from 'react';
+import { MouseEventHandler, ReactElement, useMemo, useState } from 'react';
 
 import { getFaviconUrl } from '../../helpers';
 import { useQuickLinks } from '../../quick-links-context';
@@ -24,7 +24,7 @@ interface IProps {
 }
 
 export const LinkItem = ({ link }: IProps): ReactElement => {
-  const { id, url, label, iconName, useCustomIcon } = link;
+  const { id, url, label, iconLink, iconName, useCustomIcon } = link;
   const [contextMenuAnchor, setContextMenuAnchor] = useState<Element | null>(null);
 
   const { handleEditLinkDialog, handleDeleteLink } = useQuickLinks();
@@ -71,6 +71,10 @@ export const LinkItem = ({ link }: IProps): ReactElement => {
     }
   };
 
+  const imageUrl = useMemo(() => {
+    return iconLink ? iconLink : getFaviconUrl(url, 128);
+  }, [iconLink, url]);
+
   return (
     <LinkItemStyled
       ref={setNodeRef}
@@ -85,12 +89,11 @@ export const LinkItem = ({ link }: IProps): ReactElement => {
             <img
               width={32}
               height={32}
-              src={getFaviconUrl(url, 128)}
+              src={imageUrl}
               alt=""
             />
           )}
         </IconWrapper>
-
         {label ? <LinkLabel>{label}</LinkLabel> : null}
       </LinkButton>
       <Menu
