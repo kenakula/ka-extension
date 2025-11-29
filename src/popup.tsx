@@ -1,31 +1,19 @@
 import '@app/styles/popup.css';
 
-import { Container, ErrorMessage, ServicesList } from '@app/styles/popup.styles';
+import { PopupGlobalStyles } from '@app/styles';
+import { Container } from '@app/styles/popup.styles';
+import { theme } from '@app/theme/theme';
 import { ServiceItem } from '@components/service-item/service-item';
-import type { IServiceItem } from '@shared/interfaces';
+import { ThemeProvider } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
+import Divider from '@mui/material/Divider';
+import Stack from '@mui/material/Stack';
+import { SERVICES_LIST } from '@shared/constants';
 import { ReactElement, useEffect, useState } from 'react';
 
 type Tab = chrome.tabs.Tab;
 
-const services: IServiceItem[] = [
-  {
-    name: 'cx',
-    replaceTarget: '.ru',
-    replaceValue: '.cx',
-    stylesFile: 'cx-style.css',
-    css: '.page{max-width:75vw!important}',
-  },
-  {
-    name: 'gg',
-    replaceTarget: 'kinopoisk.ru',
-    replaceValue: 'ggpoisk.ru',
-    stylesFile: 'gg-style.css',
-    // eslint-disable-next-line max-len
-    css: 'body{display:flex;align-items:center;margin:0;padding:0;border:0;width:100%;height:100%;overflow:hidden;background-color:#2a3440}@media screen and (min-width:901px){.wrapper{width:100%;height:calc(100% - 200px)!important}}',
-  },
-];
-
-const IndexPopup = (): ReactElement => {
+const Popup = (): ReactElement => {
   const [activeTab, setActiveTab] = useState<Tab>();
   const [isMoviePage, setIsMoviePage] = useState<boolean>();
 
@@ -55,20 +43,23 @@ const IndexPopup = (): ReactElement => {
   }, []);
 
   return (
-    <Container $isInvalid={!isMoviePage}>
-      {!isMoviePage && <ErrorMessage>not movie page</ErrorMessage>}
-      <ServicesList>
-        {services.map((item) => (
-          <ServiceItem
-            activeTab={activeTab}
-            item={item}
-            key={item.name}
-            isMoviePage={isMoviePage}
-          />
-        ))}
-      </ServicesList>
-    </Container>
+    <ThemeProvider theme={theme}>
+      <CssBaseline/>
+      <PopupGlobalStyles/>
+      <Container>
+        <Stack sx={{ width: '100%', justifyContent: 'center' }} divider={<Divider/>}>
+          {SERVICES_LIST.map((item) => (
+            <ServiceItem
+              activeTab={activeTab}
+              item={item}
+              key={item.name}
+              isMoviePage={isMoviePage}
+            />
+          ))}
+        </Stack>
+      </Container>
+    </ThemeProvider>
   );
 };
 
-export default IndexPopup;
+export default Popup;

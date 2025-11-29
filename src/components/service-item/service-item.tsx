@@ -1,7 +1,10 @@
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
 import type { IServiceItem } from '@shared/interfaces';
 import type { ReactElement } from 'react';
 
-import { ServiceControls, ServiceName, ServicesItem } from './styles';
+import { ServicesItem } from './styles';
 
 type Tab = chrome.tabs.Tab;
 
@@ -33,15 +36,15 @@ export const ServiceItem = ({
 
   return (
     <ServicesItem>
-      <ServiceName>{name}</ServiceName>
-      <ServiceControls>
-        <button type="button" disabled={!isMoviePage} onClick={handleOpen}>
+      <Typography sx={{ mr: 'auto' }} variant="body1">{name}</Typography>
+      <Stack direction="row" spacing={2}>
+        <Button variant="contained" size="small" disabled={!isMoviePage} onClick={handleOpen}>
           Open
-        </button>
-        <button type="button" onClick={handleInjectStyles}>
+        </Button>
+        <Button size="small" color="info" onClick={handleInjectStyles}>
           Inject
-        </button>
-      </ServiceControls>
+        </Button>
+      </Stack>
     </ServicesItem>
   );
 };

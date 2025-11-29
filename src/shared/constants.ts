@@ -1,4 +1,4 @@
-import { IQuickLinksRow } from '@shared/interfaces';
+import { IQuickLinksRow, type IServiceItem } from '@shared/interfaces';
 import { getId } from '@shared/utils';
 
 export const DEFAULT_SET_NAME = 'default';
@@ -47,5 +47,23 @@ export const QUICK_LINKS_LISTS: IQuickLinksRow[] = [
         useCustomIcon: false,
       },
     ],
+  },
+];
+
+export const SERVICES_LIST: IServiceItem[] = [
+  {
+    name: 'cx',
+    replaceTarget: '.ru',
+    replaceValue: '.cx',
+    stylesFile: 'cx-style.css',
+    css: '.page{max-width:75vw!important}',
+  },
+  {
+    name: 'gg',
+    replaceTarget: 'kinopoisk.ru',
+    replaceValue: 'ggpoisk.ru',
+    stylesFile: 'gg-style.css',
+    // eslint-disable-next-line max-len
+    css: 'body{display:flex;align-items:center;margin:0;padding:0;border:0;width:100%;height:100%;overflow:hidden;background-color:#2a3440}@media screen and (min-width:901px){.wrapper{width:100%;height:calc(100% - 200px)!important}}',
   },
 ];

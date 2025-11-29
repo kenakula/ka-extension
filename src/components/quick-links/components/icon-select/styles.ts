@@ -6,7 +6,7 @@ export const IconDialogHeader = styled.div`
   left: 0;
   top: 0;
   margin-bottom: 30px;
-  padding: 10px 20px;
+  padding: 20px;
   background-color: #676767;
 
   h2 {

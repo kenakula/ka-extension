@@ -3,7 +3,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 
-import { GlobalStyles, NewTabContainer } from '@app/styles';
+import { NewTabContainer, NewTabGlobalStyles } from '@app/styles';
 import { theme } from '@app/theme/theme';
 import { Clock } from '@components/clock';
 import { QuickLinks } from '@components/quick-links';
@@ -21,7 +21,7 @@ const NewTab = (): ReactElement => {
     <ThemeProvider theme={theme}>
       <NewTabContainer>
         <CssBaseline/>
-        <GlobalStyles/>
+        <NewTabGlobalStyles/>
         <Clock/>
         <QuickLinksProvider>
           <QuickLinks/>

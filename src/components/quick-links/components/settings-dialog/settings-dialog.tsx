@@ -36,7 +36,6 @@ export const SettingsDialog = ({
       slotProps={{ paper: () => ({ style: { width: 350 } }) }}
     >
       <SettingsContainer>
-        <Typography mb={2} variant="h2">Settings</Typography>
         <Box>
           <SettingsSectionHeader>
             <Typography variant="h4">Rows</Typography>
