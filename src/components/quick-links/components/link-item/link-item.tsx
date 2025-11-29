@@ -1,5 +1,4 @@
 import { Icon } from '@components/icon';
-import { useQuickLinks } from '@components/quick-links/quick-links-context';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -12,6 +11,7 @@ import { IQuickLink } from '@shared/interfaces';
 import { MouseEventHandler, ReactElement, useState } from 'react';
 
 import { getFaviconUrl } from '../../helpers';
+import { useQuickLinks } from '../../quick-links-context';
 import {
   IconWrapper,
   LinkButton,

@@ -1,4 +1,3 @@
-import { useQuickLinks } from '@components/quick-links/quick-links-context';
 import {
   closestCenter,
   DndContext, DragEndEvent,
@@ -11,6 +10,7 @@ import { horizontalListSortingStrategy, SortableContext } from '@dnd-kit/sortabl
 import { IQuickLink } from '@shared/interfaces';
 import { ReactElement } from 'react';
 
+import { useQuickLinks } from '../../quick-links-context';
 import { AddLinkButton } from '../add-link-button';
 import { LinkItem } from '../link-item';
 import { LinksListStyled } from './styles';

@@ -1,9 +1,9 @@
-import { useQuickLinks } from '@components/quick-links/quick-links-context';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import { ReactElement } from 'react';
 
+import { useQuickLinks } from '../../quick-links-context';
 import { LinkForm } from '../link-form';
 
 export const EditLinkDialog = (): ReactElement => {

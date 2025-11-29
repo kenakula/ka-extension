@@ -1,5 +1,3 @@
-import { SettingsRow } from '@components/quick-links/components/settings-dialog/settings-row';
-import { useQuickLinks } from '@components/quick-links/quick-links-context';
 import AddIcon from '@mui/icons-material/Add';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -10,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import { IQuickLinksRow } from '@shared/interfaces';
 import { ReactElement } from 'react';
 
+import { useQuickLinks } from '../../quick-links-context';
+import { SettingsRow } from './settings-row';
 import {
   SettingsContainer,
   SettingsSectionHeader,

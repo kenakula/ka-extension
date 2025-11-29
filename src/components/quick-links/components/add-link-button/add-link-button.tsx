@@ -1,9 +1,9 @@
-import { useQuickLinks } from '@components/quick-links/quick-links-context';
 import { Popover } from '@mui/material';
 import { ReactElement } from 'react';
 import { MouseEvent, useState } from 'react';
 import { SlPlus } from 'react-icons/sl';
 
+import { useQuickLinks } from '../../quick-links-context';
 import { LinkForm } from '../link-form';
 import { LinkItemStyled, PopoverContent, StyledAddLinkButton } from './styles';
 

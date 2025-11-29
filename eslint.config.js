@@ -67,7 +67,7 @@ const eslintConfig = [
     },
   },
   {
-    files: ['**/styles.ts', '*.styles.ts'],
+    files: ['**/*.styles.ts'],
     rules: {
       '@typescript-eslint/explicit-function-return-type': 'off',
     }

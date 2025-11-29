@@ -1,8 +1,6 @@
 import { Icon } from '@components/icon';
-import { useQuickLinks } from '@components/quick-links/quick-links-context';
 import Button from '@mui/material/Button';
 import { IQuickLink } from '@shared/interfaces';
-import { getId } from '@shared/utils';
 import { Field, Formik } from 'formik';
 import { ReactElement, useState } from 'react';
 

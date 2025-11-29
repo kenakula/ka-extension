@@ -1,4 +1,3 @@
-import { useQuickLinks } from '@components/quick-links/quick-links-context';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -12,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import { DEFAULT_SET_ID } from '@shared/constants';
 import { FormEvent, ReactElement, useState } from 'react';
 
+import { useQuickLinks } from '../../quick-links-context';
 import { LinksRowControls, StyledRow } from './styles';
 
 interface IProps {
