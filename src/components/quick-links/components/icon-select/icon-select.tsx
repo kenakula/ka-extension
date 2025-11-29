@@ -1,20 +1,15 @@
-import { Icon } from '@components/icon';
-import Button from '@mui/material/Button';
+import { DialogContentStyled } from '@components/quick-links/components/edit-link-dialog/styles';
 import Dialog from '@mui/material/Dialog';
-import DialogContent from '@mui/material/DialogContent';
-import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
-import Typography from '@mui/material/Typography';
 import { useDebounce } from '@shared/hooks';
 import { IQuickLink } from '@shared/interfaces';
 import { useFormikContext } from 'formik';
-import { ReactElement, useEffect, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useState } from 'react';
 import { IconType } from 'react-icons';
 import * as icons from 'react-icons/fa6';
 
-import {
-  IconDialogHeader,
-} from './styles';
+import { MemoizedIconsGrid } from './icons-grid';
+import { IconDialogHeader } from './styles';
 
 const iconsList = Object.entries(icons);
 
@@ -29,6 +24,11 @@ export const IconSelect = ({ isOpen, handleClose }: IProps): ReactElement => {
   const formik = useFormikContext<IQuickLink>();
 
   const debouncedSearchString = useDebounce<string>(searchString, 300);
+
+  const handleChooseIcon = useCallback(async (name: string): Promise<void> => {
+    await formik.setFieldValue('iconName', name);
+    handleClose();
+  }, []);
 
   useEffect(() => {
     if (!debouncedSearchString) {
@@ -45,7 +45,7 @@ export const IconSelect = ({ isOpen, handleClose }: IProps): ReactElement => {
 
   return (
     <Dialog open={isOpen} onClose={handleClose}>
-      <DialogContent>
+      <DialogContentStyled>
         <IconDialogHeader>
           <TextField
             fullWidth={true}
@@ -53,25 +53,12 @@ export const IconSelect = ({ isOpen, handleClose }: IProps): ReactElement => {
             size="small"
             label="search"
             sx={{ mb: 2 }}
-            onChange={e => setSearchString(e.target.value)}
+            onInput={e => setSearchString((e.target as HTMLInputElement).value)}
           />
         </IconDialogHeader>
-        <Grid container spacing={1}>
-          {filteredIcons.map(([name]) => (
-            <Grid key={name}>
-              <Button
-                onClick={async () => {
-                  await formik.setFieldValue('iconName', name);
-                  handleClose();
-                }}
-                startIcon={<Icon.FaIcon iconName={name}/>}
-              >
-                <Typography>{name.slice(2)}</Typography>
-              </Button>
-            </Grid>
-          ))}
-        </Grid>
-      </DialogContent>
+        <MemoizedIconsGrid icons={filteredIcons} onClick={handleChooseIcon}/>
+      </DialogContentStyled>
     </Dialog>
   );
 };
+
