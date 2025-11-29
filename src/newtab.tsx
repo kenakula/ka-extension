@@ -7,6 +7,7 @@ import { GlobalStyles, NewTabContainer } from '@app/styles';
 import { theme } from '@app/theme/theme';
 import { Clock } from '@components/clock';
 import { QuickLinks } from '@components/quick-links';
+import { QuickLinksProvider } from '@components/quick-links/quick-links-context';
 import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import React, { ReactElement, useLayoutEffect } from 'react';
@@ -22,7 +23,9 @@ const NewTab = (): ReactElement => {
         <CssBaseline/>
         <GlobalStyles/>
         <Clock/>
-        <QuickLinks/>
+        <QuickLinksProvider>
+          <QuickLinks/>
+        </QuickLinksProvider>
       </NewTabContainer>
     </ThemeProvider>
   );

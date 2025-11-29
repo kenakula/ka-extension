@@ -4,7 +4,7 @@ interface ILinksListStyles {
   $isOver?: boolean;
 }
 
-export const LinksList = styled.ul<ILinksListStyles>`
+export const LinksListStyled = styled.ul<ILinksListStyles>`
   margin: 0;
   padding: 0;
   display: flex;

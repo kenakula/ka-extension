@@ -1,3 +1,6 @@
+import { useQuickLinks } from '@components/quick-links/quick-links-context';
+import CancelIcon from '@mui/icons-material/Cancel';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -6,35 +9,29 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
+import { DEFAULT_SET_ID } from '@shared/constants';
 import { FormEvent, ReactElement, useState } from 'react';
 
 import { LinksRowControls, StyledRow } from './styles';
 
 interface IProps {
-  handleRemoveRow: (rowName: string) => void;
+  id: string;
   setName: string;
   isHidden: boolean;
-  toggleRowVisibility: (rowName: string) => void;
-  handleRenameRow: (rowName: string, newName: string) => void;
 }
 
-export const SettingsRow = ({
-  setName,
-  isHidden,
-  toggleRowVisibility,
-  handleRemoveRow,
-  handleRenameRow,
-}: IProps): ReactElement => {
+export const SettingsRow = ({ setName, isHidden, id }: IProps): ReactElement => {
   const [rowNameFieldValue, setRowNameFieldValue] = useState(setName);
   const [isEditingName, setIsEditingName] = useState(false);
+
+  const { handleRenameRow, toggleRowVisibility, handleDeleteRow } = useQuickLinks();
 
   const handleEditName = (): void => {
     setIsEditingName(true);
   };
 
   const handleSaveName = (): void => {
-    // TODO если имя повторяется, то пизда
-    handleRenameRow(setName, rowNameFieldValue);
+    handleRenameRow(id, rowNameFieldValue);
     setIsEditingName(false);
   };
 
@@ -54,30 +51,30 @@ export const SettingsRow = ({
           <TextField
             onInput={handleRowNameInput} variant="standard" value={rowNameFieldValue}
           />
-          <button type="button" onClick={handleSaveName}>save</button>
-          <button type="button" onClick={handleCancel}>cancel</button>
+          <IconButton color="success" size="small" onClick={handleSaveName}>
+            <CheckCircleIcon/>
+          </IconButton>
+          <IconButton color="error" onClick={handleCancel}>
+            <CancelIcon/>
+          </IconButton>
         </Stack>
-      ) : <Typography
-        mr="auto"
-        variant="body1"
-      >{setName}</Typography>}
+      ) : <Typography mr="auto" variant="body1">{setName}</Typography>}
       <LinksRowControls>
-        <IconButton size="small" onClick={() => toggleRowVisibility(setName)}>
+        <IconButton size="small" onClick={() => toggleRowVisibility(id)}>
           {isHidden ? <VisibilityOffIcon/> : <VisibilityIcon/>}
         </IconButton>
-        <IconButton
-          size="small" onClick={handleEditName}
-        >
+        <IconButton size="small" onClick={handleEditName}>
           <EditIcon/>
         </IconButton>
-        <IconButton
-          disabled={setName === 'defaultSet'}
-          color="error"
-          size="small"
-          onClick={() => handleRemoveRow(setName)}
-        >
-          <DeleteOutlineIcon/>
-        </IconButton>
+        {id !== DEFAULT_SET_ID ? (
+          <IconButton
+            color="error"
+            size="small"
+            onClick={() => handleDeleteRow(id)}
+          >
+            <DeleteOutlineIcon/>
+          </IconButton>
+        ) : null}
       </LinksRowControls>
     </StyledRow>
   );

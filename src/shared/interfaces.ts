@@ -9,7 +9,7 @@ export interface IServiceItem {
 export interface IQuickLink {
   id: string;
   url: string;
-  setName: string;
+  rowId: string;
   label?: string;
   iconLink?: string;
   iconName?: string;
@@ -17,7 +17,7 @@ export interface IQuickLink {
   useCustomIcon?: boolean;
 }
 
-export interface IQuickLinksSet {
+export interface IQuickLinksRow {
   id: string;
   name: string;
   isHidden: boolean;

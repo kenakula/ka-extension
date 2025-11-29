@@ -1,5 +1,8 @@
 import { Icon } from '@components/icon';
+import { useQuickLinks } from '@components/quick-links/quick-links-context';
+import Button from '@mui/material/Button';
 import { IQuickLink } from '@shared/interfaces';
+import { getId } from '@shared/utils';
 import { Field, Formik } from 'formik';
 import { ReactElement, useState } from 'react';
 
@@ -8,16 +11,18 @@ import { DEFAULT_VALUES } from './constants';
 import { FieldContainer, FormStyled } from './styles';
 
 interface IProps {
-  handleSubmit: (values: IQuickLink, rowName?: string) => void;
-  rowName?: string;
+  mode: 'edit' | 'add';
   defaultValues?: IQuickLink;
   handleClosePopover?: () => void;
+  rowId: string;
+  handleSubmit: (link: IQuickLink) => void;
 }
 
-export const CreateForm = ({
-  handleSubmit,
-  rowName,
+export const LinkForm = ({
   handleClosePopover,
+  handleSubmit,
+  mode,
+  rowId,
   defaultValues = DEFAULT_VALUES,
 }: IProps): ReactElement => {
   const [isIconModalOpen, setIsIconModalOpen] = useState(false);
@@ -27,14 +32,7 @@ export const CreateForm = ({
   };
 
   const handleFormSubmit = (values: IQuickLink): void => {
-    let urlValue = values.url;
-
-    if (!urlValue.startsWith('https://')) {
-      urlValue = `https://${urlValue}`;
-      values.url = urlValue;
-    }
-
-    handleSubmit(values, rowName);
+    handleSubmit({ ...values, rowId });
     handleClosePopover?.();
   };
 
@@ -61,16 +59,13 @@ export const CreateForm = ({
 
           <FieldContainer>
             <label htmlFor="#">select custom icon</label>
-            <button
-              type="button"
-              onClick={handleOpenIconModal}
-            >
+            <Button onClick={handleOpenIconModal}>
               {values.iconName ? (
                 <Icon.FaIcon iconName={values.iconName}/>
               ) : (
                 <span>choose icon</span>
               )}
-            </button>
+            </Button>
             <IconSelect
               isOpen={isIconModalOpen}
               handleClose={handleCloseEditModal}
@@ -82,9 +77,9 @@ export const CreateForm = ({
             <Field name="useCustomIcon" id="useCustomIcon" type="checkbox"/>
           </FieldContainer>
 
-          <button type="submit">
-            Add
-          </button>
+          <Button type="submit" variant="contained">
+            {mode === 'add' ? 'Add' : 'Edit'}
+          </Button>
         </FormStyled>
       )}
     </Formik>

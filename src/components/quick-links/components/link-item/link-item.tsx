@@ -1,4 +1,5 @@
 import { Icon } from '@components/icon';
+import { useQuickLinks } from '@components/quick-links/quick-links-context';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -20,21 +21,15 @@ import {
 
 interface IProps {
   link: IQuickLink;
-  handleDeleteLink: (setName: string, linkUrl: string) => void;
-  handleEditLink: (setName: string, link: IQuickLink) => void;
-  setName: string;
 }
 
-export const LinkItem = ({
-  link,
-  handleDeleteLink,
-  handleEditLink,
-  setName,
-}: IProps): ReactElement => {
-  const { url, label, iconName, useCustomIcon } = link;
+export const LinkItem = ({ link }: IProps): ReactElement => {
+  const { id, url, label, iconName, useCustomIcon } = link;
   const [contextMenuAnchor, setContextMenuAnchor] = useState<Element | null>(null);
 
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: url });
+  const { handleEditLinkDialog, handleDeleteLink } = useQuickLinks();
+
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -46,12 +41,12 @@ export const LinkItem = ({
   };
 
   const handleEditClick = (): void => {
-    handleEditLink(setName, link);
+    handleEditLinkDialog(link);
     handleCloseContextMenu();
   };
 
   const handleDeleteClick = (): void => {
-    handleDeleteLink(setName, link.url);
+    handleDeleteLink(link.rowId, link.id);
     handleCloseContextMenu();
   };
 

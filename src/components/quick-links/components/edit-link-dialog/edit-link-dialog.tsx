@@ -1,30 +1,31 @@
+import { useQuickLinks } from '@components/quick-links/quick-links-context';
 import Dialog from '@mui/material/Dialog';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
-import { IQuickLink } from '@shared/interfaces';
 import { ReactElement } from 'react';
 
-import { CreateForm } from '../create-form';
+import { LinkForm } from '../link-form';
 
-interface IProps {
-  isOpen: boolean;
-  handleClose: () => void;
-  handleSubmit: (values: IQuickLink, rowName?: string) => void;
-  defaultValues?: IQuickLink;
-}
+export const EditLinkDialog = (): ReactElement => {
+  const { editingLink, handleEditLinkDialog, handleEditLink } = useQuickLinks();
 
-export const EditLinkDialog = ({
-  isOpen,
-  handleClose,
-  handleSubmit,
-  defaultValues,
-}: IProps): ReactElement => {
+  const onClose = (): void => {
+    handleEditLinkDialog(null);
+  };
+
   return (
-    <Dialog onClose={handleClose} open={isOpen}>
+    <Dialog onClose={onClose} open={!!editingLink} maxWidth="sm" fullWidth={true}>
       <DialogTitle>Edit link</DialogTitle>
-      <DialogContent>
-        <CreateForm handleSubmit={handleSubmit} defaultValues={defaultValues}/>
-      </DialogContent>
+      {editingLink ? (
+        <DialogContent>
+          <LinkForm
+            rowId={editingLink.rowId}
+            defaultValues={editingLink}
+            handleSubmit={handleEditLink}
+            mode="edit"
+          />
+        </DialogContent>
+      ) : null}
     </Dialog>
   );
 };

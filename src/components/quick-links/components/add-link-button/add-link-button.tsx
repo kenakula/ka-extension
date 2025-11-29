@@ -1,19 +1,20 @@
+import { useQuickLinks } from '@components/quick-links/quick-links-context';
 import { Popover } from '@mui/material';
-import { IQuickLink } from '@shared/interfaces';
 import { ReactElement } from 'react';
 import { MouseEvent, useState } from 'react';
 import { SlPlus } from 'react-icons/sl';
 
-import { CreateForm } from '../create-form';
+import { LinkForm } from '../link-form';
 import { LinkItemStyled, PopoverContent, StyledAddLinkButton } from './styles';
 
 interface IProps {
-  rowName: string;
-  addLink: (link: IQuickLink, rowName: string) => void;
+  rowId: string;
 }
 
-export const AddLinkButton = ({ rowName, addLink }: IProps): ReactElement => {
+export const AddLinkButton = ({ rowId }: IProps): ReactElement => {
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const { handleAddLink } = useQuickLinks();
 
   const handleClick = (event: MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
@@ -40,7 +41,7 @@ export const AddLinkButton = ({ rowName, addLink }: IProps): ReactElement => {
         }}
       >
         <PopoverContent>
-          <CreateForm rowName={rowName} handleSubmit={addLink} handleClosePopover={handleClose}/>
+          <LinkForm mode="add" rowId={rowId} handleSubmit={handleAddLink} handleClosePopover={handleClose}/>
         </PopoverContent>
       </Popover>
     </>
