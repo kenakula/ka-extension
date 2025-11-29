@@ -1,7 +1,9 @@
+import Box from '@mui/material/Box';
+import { styled } from '@mui/material/styles';
 import { Form } from 'formik';
-import styled from 'styled-components';
 
 export const FormStyled = styled(Form)`
+  padding: 10px 0;
   display: flex;
   flex-direction: column;
   row-gap: 10px;
@@ -11,12 +13,8 @@ export const FormStyled = styled(Form)`
   }
 `;
 
-export const FieldContainer = styled.div`
+export const ChooseIconContainer = styled(Box)`
   display: flex;
-  flex-direction: column;
-  row-gap: 5px;
-
-  label {
-    font-size: 12px;
-  }
+  align-items: center;
+  column-gap: 20px;
 `;

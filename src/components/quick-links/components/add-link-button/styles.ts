@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const PopoverContent = styled.div`
   background-color: rgba(240, 248, 255, 0.23);
-  padding: 10px;
+  padding: 0 10px;
   border-radius: 8px;
+  min-width: 350px;
 `;
 
 export const LinkItemStyled = styled.li`

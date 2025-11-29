@@ -1,12 +1,17 @@
 import { Icon } from '@components/icon';
 import Button from '@mui/material/Button';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import IconButton from '@mui/material/IconButton';
+import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import { IQuickLink } from '@shared/interfaces';
-import { Field, Formik } from 'formik';
+import { Formik } from 'formik';
 import { ReactElement, useState } from 'react';
 
 import { IconSelect } from '../icon-select';
 import { DEFAULT_VALUES } from './constants';
-import { FieldContainer, FormStyled } from './styles';
+import { ChooseIconContainer, FormStyled } from './styles';
 
 interface IProps {
   mode: 'edit' | 'add';
@@ -43,37 +48,64 @@ export const LinkForm = ({
       initialValues={defaultValues}
       onSubmit={handleFormSubmit}
     >
-      {({ values }) => (
+      {({ values, handleBlur, handleChange }) => (
         <FormStyled>
-          <FieldContainer>
-            <label htmlFor="url">url</label>
-            <Field id="url" name="url"/>
-          </FieldContainer>
+          <TextField
+            label="url"
+            name="url"
+            fullWidth
+            value={values.url}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            variant="standard"
+          />
 
-          <FieldContainer>
-            <label htmlFor="label">label</label>
-            <Field id="label" name="label"/>
-          </FieldContainer>
+          <TextField
+            label="label"
+            name="label"
+            fullWidth
+            value={values.label}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            variant="standard"
+          />
 
-          <FieldContainer>
-            <label htmlFor="#">select custom icon</label>
-            <Button onClick={handleOpenIconModal}>
-              {values.iconName ? (
+          <TextField
+            label="iconLink"
+            name="iconLink"
+            fullWidth
+            value={values.iconLink}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            variant="standard"
+          />
+
+          <ChooseIconContainer>
+            <Typography variant="body1">Custom icon:</Typography>
+            {values.iconName ? (
+              <IconButton onClick={handleOpenIconModal}>
                 <Icon.FaIcon iconName={values.iconName}/>
-              ) : (
-                <span>choose icon</span>
-              )}
-            </Button>
+              </IconButton>
+            ) : (
+              <Button variant="outlined" color="warning" onClick={handleOpenIconModal}>
+                choose icon
+              </Button>
+            )}
+
             <IconSelect
               isOpen={isIconModalOpen}
               handleClose={handleCloseEditModal}
             />
-          </FieldContainer>
+          </ChooseIconContainer>
 
-          <FieldContainer>
-            <label htmlFor="useCustomIcon">use custom icon</label>
-            <Field name="useCustomIcon" id="useCustomIcon" type="checkbox"/>
-          </FieldContainer>
+          <FormControlLabel
+            label="useCustomIcon"
+            control={<Checkbox/>}
+            value={values.useCustomIcon}
+            name="useCustomIcon"
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
 
           <Button type="submit" variant="contained">
             {mode === 'add' ? 'Add' : 'Edit'}

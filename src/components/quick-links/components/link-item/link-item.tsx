@@ -50,13 +50,25 @@ export const LinkItem = ({ link }: IProps): ReactElement => {
     handleCloseContextMenu();
   };
 
-  const handleLinkButtonClick = (): void => {
-    window.location.href = link.url;
-  };
-
   const handleOpenContextMenu: MouseEventHandler<HTMLLIElement> = (event): void => {
     event.preventDefault();
     setContextMenuAnchor(event.currentTarget);
+  };
+
+  const handleLinkButtonClick: MouseEventHandler<HTMLButtonElement> = (event): void => {
+    if (event.metaKey) {
+      window.open(link.url, '_blank');
+
+      return;
+    }
+
+    window.location.href = link.url;
+  };
+
+  const handleLinkMouseDown: MouseEventHandler<HTMLButtonElement> = (event): void => {
+    if (event.button == 1 || event.buttons == 4) {
+      window.open(link.url, '_blank');
+    }
   };
 
   return (
@@ -65,7 +77,7 @@ export const LinkItem = ({ link }: IProps): ReactElement => {
       style={style} {...attributes} {...listeners}
       onContextMenu={handleOpenContextMenu}
     >
-      <LinkButton onClick={handleLinkButtonClick}>
+      <LinkButton onClick={handleLinkButtonClick} onMouseDown={handleLinkMouseDown}>
         <IconWrapper>
           {useCustomIcon ? (
             <Icon.FaIcon iconName={iconName}/>
