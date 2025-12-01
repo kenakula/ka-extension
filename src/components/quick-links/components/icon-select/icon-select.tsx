@@ -1,4 +1,3 @@
-import { DialogContentStyled } from '@components/quick-links/components/edit-link-dialog/styles';
 import Dialog from '@mui/material/Dialog';
 import TextField from '@mui/material/TextField';
 import { useDebounce } from '@shared/hooks';
@@ -8,7 +7,8 @@ import { ReactElement, useCallback, useEffect, useState } from 'react';
 import { IconType } from 'react-icons';
 import * as icons from 'react-icons/fa6';
 
-import { MemoizedIconsGrid } from './icons-grid';
+import { IconsGrid } from './icons-grid';
+import { DialogContentStyled } from './styles';
 import { IconDialogHeader } from './styles';
 
 const iconsList = Object.entries(icons);
@@ -56,7 +56,7 @@ export const IconSelect = ({ isOpen, handleClose }: IProps): ReactElement => {
             onInput={e => setSearchString((e.target as HTMLInputElement).value)}
           />
         </IconDialogHeader>
-        <MemoizedIconsGrid icons={filteredIcons} onClick={handleChooseIcon}/>
+        <IconsGrid icons={filteredIcons} onClick={handleChooseIcon}/>
       </DialogContentStyled>
     </Dialog>
   );

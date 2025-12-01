@@ -1,4 +1,5 @@
 import Box from '@mui/material/Box';
+import DialogContent from '@mui/material/DialogContent';
 import IconButton from '@mui/material/IconButton';
 import { styled } from '@mui/material/styles';
 
@@ -20,4 +21,8 @@ export const StyledIconButton = styled(IconButton)`
   display: flex;
   flex-direction: column;
   row-gap: 5px;
+`;
+
+export const DialogContentStyled = styled(DialogContent)`
+  min-width: 600px;
 `;

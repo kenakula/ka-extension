@@ -59,17 +59,6 @@ export const LinkForm = ({
             onBlur={handleBlur}
             variant="standard"
           />
-
-          <TextField
-            label="label"
-            name="label"
-            fullWidth
-            value={values.label}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            variant="standard"
-          />
-
           <TextField
             label="iconLink"
             name="iconLink"
@@ -79,7 +68,15 @@ export const LinkForm = ({
             onBlur={handleBlur}
             variant="standard"
           />
-
+          <TextField
+            label="label"
+            name="label"
+            fullWidth
+            value={values.label}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            variant="standard"
+          />
           <ChooseIconContainer>
             <Typography variant="body1">Custom icon:</Typography>
             {values.iconName ? (

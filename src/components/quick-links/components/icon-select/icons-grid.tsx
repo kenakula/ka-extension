@@ -10,7 +10,7 @@ interface IGridProps {
   onClick: (name: string) => Promise<void>;
 }
 
-const IconsGrid = ({ icons, onClick }: IGridProps): ReactElement => {
+const IconsGridComponent = ({ icons, onClick }: IGridProps): ReactElement => {
   return (
     <Grid container spacing={1}>
       {icons.map(([name]) => (
@@ -26,4 +26,4 @@ const IconsGrid = ({ icons, onClick }: IGridProps): ReactElement => {
   );
 };
 
-export const MemoizedIconsGrid = memo(IconsGrid);
+export const IconsGrid = memo(IconsGridComponent);
