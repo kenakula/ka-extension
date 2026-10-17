@@ -38,7 +38,7 @@ export const IconSelect = ({ isOpen, handleClose }: IProps): ReactElement => {
     }
 
     const filtered = iconsList.filter(([iconName]) =>
-      iconName.toLowerCase().includes(debouncedSearchString.toLowerCase()),
+      iconName?.toLowerCase().includes(debouncedSearchString.toLowerCase()),
     );
     setFilteredIcons(filtered);
   }, [debouncedSearchString]);

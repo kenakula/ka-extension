@@ -3,7 +3,7 @@ import '@app/styles/popup.css';
 import { PopupGlobalStyles } from '@app/styles';
 import { Container } from '@app/styles/popup.styles';
 import { theme } from '@app/theme/theme';
-import { ServiceItem } from '@components/service-item/service-item';
+import { ServiceItem } from '@components/service-item';
 import { ThemeProvider } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
@@ -29,12 +29,14 @@ const Popup = (): ReactElement => {
   };
 
   const validateTabUrl = (): void => {
-    if (!activeTab) return;
+    if (!activeTab?.url) return;
 
-    setIsMoviePage(
-      activeTab?.url?.includes('kinopoisk.ru/film/') ||
-      activeTab.url.includes('kinopoisk.ru/series/'),
-    );
+    const isMoviePage = [
+      'kinopoisk.ru/film/',
+      'kinopoisk.ru/series/',
+    ].some(url => activeTab.url.includes(url));
+
+    setIsMoviePage(isMoviePage);
   };
 
   useEffect(validateTabUrl, [activeTab]);
@@ -48,7 +50,7 @@ const Popup = (): ReactElement => {
       <PopupGlobalStyles/>
       <Container>
         <Stack sx={{ width: '100%', justifyContent: 'center' }} divider={<Divider/>}>
-          {SERVICES_LIST.map((item) => (
+          {SERVICES_LIST.filter(item => !item.deprecated).map((item) => (
             <ServiceItem
               activeTab={activeTab}
               item={item}

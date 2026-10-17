@@ -2,8 +2,8 @@ export interface IServiceItem {
   name: string;
   replaceTarget: string;
   replaceValue: string;
-  stylesFile: string;
   css: string;
+  deprecated?: boolean;
 }
 
 export interface IQuickLink {

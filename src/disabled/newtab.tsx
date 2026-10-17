@@ -1,3 +1,5 @@
+// Disabled: Plasmo only registers the new tab override from src/newtab.tsx.
+// Move this file back to src/newtab.tsx to re-enable it.
 import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';

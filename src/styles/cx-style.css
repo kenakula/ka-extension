@@ -1,7 +1,19 @@
 .page {
-  max-width: 75vw !important;
+  max-width: 70vw !important;
 }
 
 .hideCursor {
   cursor: none;
+}
+
+.webr #film img,
+#film .spacer-md,
+.user-note,
+.disclaimer,
+.footer {
+  display: none;
+}
+
+.webr #film iframe {
+  min-height: 73vh !important;
 }

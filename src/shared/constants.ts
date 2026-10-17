@@ -1,5 +1,7 @@
 import { IQuickLinksRow, type IServiceItem } from '@shared/interfaces';
 import { getId } from '@shared/utils';
+import cxStyles from 'data-text:~styles/cx-style.css';
+import ggStyles from 'data-text:~styles/gg-style.css';
 
 export const DEFAULT_SET_NAME = 'default';
 export const DEFAULT_SET_ID = 'defaultListIdUnique';
@@ -55,15 +57,18 @@ export const SERVICES_LIST: IServiceItem[] = [
     name: 'cx',
     replaceTarget: '.ru',
     replaceValue: '.cx',
-    stylesFile: 'cx-style.css',
-    css: '.page{max-width:75vw!important}',
+    css: cxStyles,
   },
   {
-    name: 'gg',
+    name: 'win',
     replaceTarget: 'kinopoisk.ru',
-    replaceValue: 'ggpoisk.ru',
-    stylesFile: 'gg-style.css',
-    // eslint-disable-next-line max-len
-    css: 'body{display:flex;align-items:center;margin:0;padding:0;border:0;width:100%;height:100%;overflow:hidden;background-color:#2a3440}@media screen and (min-width:901px){.wrapper{width:100%;height:calc(100% - 200px)!important}}',
+    replaceValue: 'kinokino.win',
+    css: ggStyles,
+  },
+  {
+    name: 'ws',
+    replaceTarget: '.ru',
+    replaceValue: '.ws',
+    css: cxStyles,
   },
 ];
